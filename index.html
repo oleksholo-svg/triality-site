@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triality — GTA 5 RP</title>
+<link rel="icon" type="image/png" href="app-logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  /* --- БАЗА --- */
+  * { scroll-behavior: smooth; box-sizing: border-box; }
+  body { 
+    background: #07070b; 
+    color: #e5e7eb; 
+    font-family: 'Inter', sans-serif; 
+    overflow-x: hidden; 
+    margin: 0; 
+    padding: 0;
+    
+    /* ЗАЩИТА ОТ ВЫДЕЛЕНИЯ ТЕКСТА */
+    -webkit-user-select: none; 
+    -moz-user-select: none;    
+    -ms-user-select: none;     
+    user-select: none;         
+  }
+  h1, h2, h3 { font-family: 'Rajdhani', sans-serif; letter-spacing: 0.02em; }
+
+  /* --- ГИГАНТСКИЙ ВОДЯНОЙ ЗНАК --- */
+  .watermark {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Rajdhani', sans-serif; font-size: 25vw; font-weight: 700;
+    color: rgba(168, 85, 247, 0.03); z-index: -2; pointer-events: none;
+    letter-spacing: 1vw; white-space: nowrap;
+    animation: watermarkPulse 10s ease-in-out infinite alternate;
+  }
+  @keyframes watermarkPulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    100% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+  }
+
+  /* --- HUD ИНТЕРФЕЙС (БЕЗ РАДАРА) --- */
+  .hud-text { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: rgba(34, 211, 238, 0.4); text-transform: uppercase; letter-spacing: 1px; pointer-events: none; z-index: 9991; position: fixed; }
+  
+  .hud-tl { top: 20px; left: 20px; border-left: 2px solid rgba(34, 211, 238, 0.4); padding-left: 8px; }
+  .hud-tr { top: 20px; right: 20px; text-align: right; border-right: 2px solid rgba(34, 211, 238, 0.4); padding-right: 8px; }
+  .hud-bl { bottom: 20px; left: 20px; }
+
+  /* --- БЕГУЩАЯ СТРОКА --- */
+  .marquee-wrapper {
+    width: 100%; overflow: hidden; background: rgba(10, 10, 15, 0.8); 
+    border-top: 1px solid rgba(168,85,247,0.2); border-bottom: 1px solid rgba(168,85,247,0.2);
+    padding: 15px 0; margin: 0; position: relative; z-index: 10;
+    box-shadow: 0 0 20px rgba(168,85,247,0.1) inset;
+  }
+  .marquee-content {
+    display: flex; white-space: nowrap; 
+    animation: marqueeScroll 20s linear infinite;
+  }
+  .marquee-item {
+    font-family: 'Rajdhani', sans-serif; font-size: 24px; font-weight: 600;
+    color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 5px;
+    margin-right: 50px; display: flex; align-items: center; gap: 20px;
+  }
+  .marquee-item span { color: #a855f7; font-size: 18px; }
+  @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* --- СБОЙ ЭКРАНА (ГЛИТЧ) --- */
+  .glitch-active { animation: screenGlitch 0.25s ease-in-out; }
+  @keyframes screenGlitch {
+    0% { transform: translate(0); filter: hue-rotate(0deg) contrast(100%); }
+    20% { transform: translate(-2px, 1px); filter: hue-rotate(15deg) contrast(105%); }
+    40% { transform: translate(2px, -1px); filter: hue-rotate(-15deg) contrast(105%); }
+    60% { transform: translate(-1px, -1px); filter: hue-rotate(10deg); }
+    80% { transform: translate(1px, 1px); filter: hue-rotate(-10deg); }
+    100% { transform: translate(0); filter: hue-rotate(0deg) contrast(100%); }
+  }
+
+  /* --- ВИНЬЕТКА --- */
+  .vignette { position: fixed; inset: 0; z-index: 9989; pointer-events: none; background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.8) 120%); }
+
+  /* --- КАСТОМНЫЙ КУРСОР --- */
+  @media (min-width: 768px) {
+    body, a, button { cursor: none !important; }
+    #cursor-dot { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background: #a855f7; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background 0.2s; }
+    #cursor-ring { position: fixed; top: 0; left: 0; width: 40px; height: 40px; border: 1px solid rgba(34, 211, 238, 0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, border-color 0.2s, transform 0.1s; }
+    body.hovering #cursor-dot { width: 12px; height: 12px; background: #fff; }
+    body.hovering #cursor-ring { width: 60px; height: 60px; border-color: #a855f7; }
+  }
+
+  /* --- ФОН И АНИМАЦИИ --- */
+  .glow-blob { position: fixed; border-radius: 50%; filter: blur(120px); opacity: 0.35; pointer-events: none; z-index: 0; transition: transform 0.1s ease-out; }
+  .blob-1 { top: -100px; left: -100px; width: 500px; height: 500px; background: #a855f7; }
+  .blob-2 { bottom: -100px; right: -100px; width: 500px; height: 500px; background: #22d3ee; }
+  
+  .grid-bg { position: fixed; inset: 0; z-index: -1; background-image: linear-gradient(rgba(168,85,247,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.06) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%); animation: moveGrid 10s linear infinite; }
+  @keyframes moveGrid { 0% { background-position: 0 0; } 100% { background-position: 50px 50px; } }
+
+  /* --- ДОЖДЬ --- */
+  #rain-container { position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+  .rain-drop { position: absolute; top: -20px; width: 1px; height: 20px; background: linear-gradient(to bottom, transparent, rgba(34, 211, 238, 0.8)); animation: rainFall linear infinite; }
+  @keyframes rainFall { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(105vh); opacity: 0; } }
+
+  /* --- ЧАСТИЦЫ --- */
+  #particles-container { position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+  .particle { position: absolute; bottom: -10px; background: #a855f7; border-radius: 50%; box-shadow: 0 0 10px #a855f7; opacity: 0; animation: floatUp linear infinite; }
+  @keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.6; } 100% { transform: translateY(-100vh) scale(0); opacity: 0; } }
+
+  /* --- ПОСТОЯННАЯ АНИМАЦИЯ ТЕКСТА --- */
+  .constant-glow { background: linear-gradient(90deg, #a855f7, #22d3ee, #a855f7); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 3s linear infinite; filter: drop-shadow(0 0 15px rgba(168,85,247,0.4)); }
+  @keyframes shine { to { background-position: 200% center; } }
+
+  /* --- ПЕЧАТНАЯ МАШИНКА --- */
+  .typewriter::after { content: '|'; animation: blink 1s step-start infinite; color: #a855f7; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* --- КАРТОЧКИ И ЭФФЕКТ СКАНИРОВАНИЯ --- */
+  .gradient-text { background: linear-gradient(90deg, #a855f7, #22d3ee); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .neon-border, .discipline-card { position: relative; background: rgba(15, 15, 25, 0.6); border: 1px solid rgba(168,85,247,0.2); backdrop-filter: blur(10px); transition: border-color 0.3s, box-shadow 0.3s; transform-style: preserve-3d; overflow: hidden; }
+  .discipline-card { border-color: rgba(34, 211, 238, 0.2); background: linear-gradient(145deg, rgba(20,20,30,0.8), rgba(10,10,15,0.9)); box-shadow: inset 0 0 20px rgba(34, 211, 238, 0.05); }
+  .neon-border::before, .discipline-card::before { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent, rgba(168,85,247,0.3), transparent); transition: top 0.5s ease; z-index: 0; pointer-events: none; }
+  .discipline-card::before { background: linear-gradient(to bottom, transparent, rgba(34,211,238,0.3), transparent); }
+  .neon-border:hover { border-color: rgba(168,85,247,0.6); box-shadow: 0 0 30px rgba(168,85,247,0.25); }
+  .discipline-card:hover { border-color: rgba(34, 211, 238, 0.6); box-shadow: 0 0 30px rgba(34, 211, 238, 0.2); }
+  .neon-border:hover::before, .discipline-card:hover::before { top: 100%; }
+
+  .btn-primary { position: relative; background: linear-gradient(135deg, #a855f7, #22d3ee); transition: all 0.3s; overflow: hidden; }
+  .btn-primary::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.3); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.4s ease-out, height 0.4s ease-out; }
+  .btn-primary:hover::before { width: 300px; height: 300px; opacity: 0; }
+  .btn-primary:hover { box-shadow: 0 0 30px rgba(168,85,247,0.6); transform: scale(1.03); }
+
+  .btn-ghost { border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; }
+  .btn-ghost:hover { border-color: #a855f7; background: rgba(168,85,247,0.1); box-shadow: 0 0 20px rgba(168,85,247,0.3); }
+
+  .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  
+  .nav-blur { background: rgba(7,7,11,0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .nav-link { transition: all 0.3s; }
+  .nav-link.active { color: #a855f7; text-shadow: 0 0 10px rgba(168,85,247,0.5); font-weight: 600; }
+
+  #mobileMenu { transition: max-height 0.3s ease, opacity 0.3s ease; max-height: 0; overflow: hidden; opacity: 0; }
+  #mobileMenu.open { max-height: 400px; opacity: 1; }
+
+  /* --- ЭФФЕКТ КЛИКА (ВОЛНЫ) --- */
+  .ripple { position: fixed; border-radius: 50%; border: 2px solid #a855f7; pointer-events: none; z-index: 9997; transform: translate(-50%, -50%); animation: ripple-anim 0.6s ease-out forwards; }
+  @keyframes ripple-anim { 0% { width: 0; height: 0; opacity: 1; } 100% { width: 100px; height: 100px; opacity: 0; } }
+
+  /* --- ГАЛЕРЕЯ --- */
+  .history-img-wrapper { transition: all 0.4s ease; cursor: pointer; }
+  .history-img-wrapper:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 0 30px rgba(168, 85, 247, 0.5); border-color: #a855f7; z-index: 10; }
+  .history-img-wrapper img { transition: transform 0.5s ease; }
+  .history-img-wrapper:hover img { transform: scale(1.1); }
+
+  /* --- ИНДИКАТОР СКРОЛЛА --- */
+  .scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 5px; color: #a855f7; opacity: 0.7; transition: 0.3s; }
+  .scroll-indicator:hover { opacity: 1; color: #22d3ee; }
+  .scroll-indicator svg { animation: bounce 2s infinite; }
+  @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
+</style>
+</head>
+<body class="relative">
+
+<!-- Гигантский водяной знак -->
+<div class="watermark">TRIALITY</div>
+
+<!-- HUD Интерфейс -->
+<div class="hud-text hud-tl">SYS.ONLINE // TRIALITY_OS v2.0</div>
+<div class="hud-text hud-tr">CONNECTION: SECURE<br>LAT: 14ms | PING: 32ms</div>
+<div class="hud-text hud-bl">LAT: 34.0522° N, LON: 118.2437° W<br>STATUS: ACTIVE</div>
+
+<!-- Виньетка -->
+<div class="vignette"></div>
+
+<!-- Кастомный курсор -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- Фон -->
+<div class="grid-bg"></div>
+<div class="glow-blob blob-1" id="blob1"></div>
+<div class="glow-blob blob-2" id="blob2"></div>
+<div id="particles-container"></div>
+<div id="rain-container"></div>
+
+<!-- NAV -->
+<nav class="nav-blur fixed top-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-4">
+      <div class="bg-black/50 border border-white/10 p-1.5 rounded-xl shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+        <img src="logo.png" onerror="this.style.display='none'" alt="Triality Logo" class="h-10 md:h-12 w-auto object-contain">
+      </div>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm">
+      <a href="#about" class="nav-link text-gray-300 hover:text-purple-400">О нас</a>
+      <a href="#history" class="nav-link text-gray-300 hover:text-purple-400">История</a>
+      <a href="#media" class="nav-link text-gray-300 hover:text-purple-400">Медиа</a>
+      <a href="#downloads" class="nav-link text-gray-300 hover:text-purple-400">Приложения</a>
+      <a href="#join" class="btn-primary text-black font-semibold px-5 py-2 rounded-lg cursor-target">Вступить</a>
+    </div>
+    <button id="burger" class="md:hidden text-2xl">☰</button>
+  </div>
+  <div id="mobileMenu" class="md:hidden px-6 pb-4 flex flex-col gap-3 text-sm bg-[#07070b]">
+    <a href="#about" class="py-2 border-b border-white/5">О нас</a>
+    <a href="#history" class="py-2 border-b border-white/5">История</a>
+    <a href="#media" class="py-2 border-b border-white/5">Медиа</a>
+    <a href="#downloads" class="py-2 border-b border-white/5">Приложения</a>
+    <a href="#join" class="btn-primary text-black font-semibold px-5 py-2 rounded-lg text-center mt-2 cursor-target">Вступить</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-16">
+  <div class="max-w-5xl mx-auto text-center relative z-10">
+    <div class="inline-block mb-6 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-sm text-purple-300 pulse">
+      ● Семья активна на сервере Blaine (GTA 5 RP)
+    </div>
+    
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold leading-none mb-6">
+      СЕМЬЯ <span class="constant-glow">TRIALITY</span>
+    </h1>
+    
+    <p id="typewriter-text" class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed typewriter h-16 sm:h-auto"></p>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#join" class="btn-primary text-black font-semibold px-8 py-4 rounded-xl text-lg cursor-target">Подать заявку</a>
+      <a href="#downloads" class="btn-ghost px-8 py-4 rounded-xl text-lg cursor-target">Приложения</a>
+    </div>
+    
+    <div class="grid grid-cols-3 gap-4 md:gap-12 mt-20 max-w-3xl mx-auto text-center">
+      <div class="tilt-card cursor-target">
+        <div class="text-4xl md:text-5xl lg:text-6xl font-bold gradient-text" style="font-family:'Rajdhani';">250+</div>
+        <div class="text-xs md:text-sm lg:text-base text-gray-500 mt-2 uppercase tracking-widest font-semibold">человек</div>
+      </div>
+      <div class="tilt-card cursor-target">
+        <div class="text-4xl md:text-5xl lg:text-6xl font-bold gradient-text" style="font-family:'Rajdhani';">24/7</div>
+        <div class="text-xs md:text-sm lg:text-base text-gray-500 mt-2 uppercase tracking-widest font-semibold">онлайн</div>
+      </div>
+      <div class="tilt-card cursor-target">
+        <div class="text-4xl md:text-5xl lg:text-6xl font-bold gradient-text" style="font-family:'Rajdhani';">1</div>
+        <div class="text-xs md:text-sm lg:text-base text-gray-500 mt-2 uppercase tracking-widest font-semibold">год семье</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-indicator cursor-target">
+    <span class="text-xs uppercase tracking-[0.2em] font-bold">Листай вниз</span>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+  </a>
+</section>
+
+<!-- БЕГУЩАЯ СТРОКА (MARQUEE) -->
+<div class="marquee-wrapper">
+  <div class="marquee-content">
+    <div class="marquee-item">TRIALITY <span>•</span> GTA 5 RP <span>•</span> СЕРВЕР BLAINE <span>•</span> НАБОР ОТКРЫТ <span>•</span> </div>
+    <div class="marquee-item">TRIALITY <span>•</span> GTA 5 RP <span>•</span> СЕРВЕР BLAINE <span>•</span> НАБОР ОТКРЫТ <span>•</span> </div>
+    <div class="marquee-item">TRIALITY <span>•</span> GTA 5 RP <span>•</span> СЕРВЕР BLAINE <span>•</span> НАБОР ОТКРЫТ <span>•</span> </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="relative py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-in">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">О <span class="gradient-text">СЕМЬЕ</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Узнай, кто мы и чем живём</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div class="neon-border rounded-2xl p-8 fade-in tilt-card cursor-target">
+        <div class="text-4xl mb-4 relative z-10">🔥</div>
+        <h3 class="text-2xl font-bold mb-3 relative z-10">Активность</h3>
+        <p class="text-gray-400 text-sm leading-relaxed relative z-10">Ежедневные сборы, CAPTURE, BIZAWAR, VZP, RP-мероприятия. У нас всегда есть чем заняться — скучать не придётся.</p>
+      </div>
+      <div class="discipline-card rounded-2xl p-8 fade-in tilt-card cursor-target">
+        <div class="text-4xl mb-4 relative z-10 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]">🛡️</div>
+        <h3 class="text-2xl font-bold mb-3 relative z-10 text-cyan-50">Дисциплина</h3>
+        <p class="text-cyan-100/60 text-sm leading-relaxed relative z-10">Чёткая структура и ранги. При этом дружелюбная и комфортная атмосфера внутри коллектива.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section id="history" class="relative py-24 px-6 bg-black/40">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-in">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">НАША <span class="gradient-text">ИСТОРИЯ</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Моменты, которые мы пережили вместе</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="1.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="1">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="2.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="2">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="3.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="3">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="4.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="4">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="5.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="5">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="6.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="6">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="7.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="7">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="8.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="8">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="9.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="9">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="10.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="10">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="11.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="11">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-target tilt-card history-img-wrapper">
+        <img src="12.jpg" onerror="this.style.display='none'" class="w-full h-auto object-cover aspect-video" alt="12">
+        <div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA -->
+<section id="media" class="relative py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-in">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">НАШИ <span class="gradient-text">МЕДИА</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Видео, гайды и нарезки от участников семьи</p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      
+      <div class="neon-border rounded-2xl p-8 flex flex-col items-center text-center fade-in group transition-all duration-300 tilt-card cursor-target">
+        <div class="w-24 h-24 rounded-full border-2 border-red-500/30 overflow-hidden mb-6 group-hover:scale-110 group-hover:border-red-500 transition duration-300 shadow-[0_0_15px_rgba(239,68,68,0.2)] bg-[#1a1a1a] relative z-10">
+          <img src="pepez.jpg" onerror="this.src='https://ui-avatars.com/api/?name=PepezHSS&background=ef4444&color=fff'" alt="PepezHSS" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-white relative z-10">PepezHSS</h3>
+        <p class="text-gray-400 text-sm mb-8 flex-grow relative z-10">Эксклюзивный контент, геймплей и лучшие моменты с сервера.</p>
+        <div class="w-full flex flex-col gap-3 relative z-10">
+          <a href="https://www.youtube.com/@PepezHSS" target="_blank" class="w-full h-12 flex items-center justify-center bg-white/5 border border-white/10 text-white rounded-lg text-sm font-medium hover:bg-red-500 hover:border-red-500 hover:text-white transition-all duration-300 cursor-target">Перейти на канал</a>
+          <a href="https://t.me/pepez5rp" target="_blank" class="w-full h-12 flex items-center justify-center bg-white/5 border border-white/10 text-white rounded-lg text-sm font-medium hover:bg-[#229ED9] hover:border-[#229ED9] hover:text-white transition-all duration-300 cursor-target">Перейти в Telegram</a>
+        </div>
+      </div>
+
+      <div class="neon-border rounded-2xl p-8 flex flex-col items-center text-center fade-in group transition-all duration-300 tilt-card cursor-target">
+        <div class="w-24 h-24 rounded-full border-2 border-red-500/30 overflow-hidden mb-6 group-hover:scale-110 group-hover:border-red-500 transition duration-300 shadow-[0_0_15px_rgba(239,68,68,0.2)] bg-[#1a1a1a] relative z-10">
+          <img src="pochemy.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Pochemychkina&background=ef4444&color=fff'" alt="Pochemychkina" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-white relative z-10">Pochemychkina</h3>
+        <p class="text-gray-400 text-sm mb-8 flex-grow relative z-10">Интересные видео, стримы и развлекательный контент от участника семьи.</p>
+        <div class="w-full flex flex-col gap-3 relative z-10">
+          <a href="https://www.youtube.com/@pochemychkina" target="_blank" class="w-full h-12 flex items-center justify-center bg-white/5 border border-white/10 text-white rounded-lg text-sm font-medium hover:bg-red-500 hover:border-red-500 hover:text-white transition-all duration-300 cursor-target">Перейти на канал</a>
+          <a href="https://t.me/pochemychkinaa" target="_blank" class="w-full h-12 flex items-center justify-center bg-white/5 border border-white/10 text-white rounded-lg text-sm font-medium hover:bg-[#229ED9] hover:border-[#229ED9] hover:text-white transition-all duration-300 cursor-target">Перейти в Telegram</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOADS -->
+<section id="downloads" class="relative py-24 px-6 bg-black/40">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-in">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">СКАЧАТЬ <span class="gradient-text">ПРИЛОЖЕНИЯ</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Утилиты и программы от семьи Triality</p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
+      
+      <div class="neon-border rounded-2xl p-6 fade-in flex flex-col justify-between tilt-card cursor-target">
+        <div class="relative z-10">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-14 h-14 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center overflow-hidden">
+              <img src="app-logo.png" onerror="this.style.display='none'" class="w-10 h-10 object-contain opacity-50">
+            </div>
+            <span class="text-xs px-2 py-1 rounded bg-gray-500/20 text-gray-400">В РАЗРАБОТКЕ</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">TRIALITY MODS</h3>
+          <p class="text-gray-400 text-sm mb-6">Сборник модов и скриптов для комфортной игры на сервере.</p>
+        </div>
+        <button onclick="alert('TrialityMods находится в разработке. Следите за обновлениями в нашем Discord!')" class="w-full h-12 flex items-center justify-center bg-white/5 border border-white/10 text-gray-400 rounded-lg text-sm font-medium hover:bg-white/10 transition cursor-not-allowed relative z-10 cursor-target">
+          В разработке ⏳
+        </button>
+      </div>
+
+      <div class="neon-border rounded-2xl p-6 fade-in flex flex-col justify-between tilt-card cursor-target">
+        <div class="relative z-10">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-14 h-14 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center overflow-hidden">
+              <img src="app-logo.png" onerror="this.style.display='none'" class="w-10 h-10 object-contain">
+            </div>
+            <span class="text-xs px-2 py-1 rounded bg-cyan-500/20 text-cyan-300">BETA TEST</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">TRIALITY PEREKUP</h3>
+          <p class="text-gray-400 text-sm mb-6">Утилита для перекупства.</p>
+        </div>
+        <a href="https://github.com/oleksholo-svg/TrialityPerekup/releases/download/v2.2.1/TrialityPerekup.exe" target="_blank" class="w-full h-12 flex items-center justify-center bg-transparent border border-white/15 text-gray-300 rounded-lg text-sm font-medium hover:border-purple-500 hover:bg-purple-500/10 transition-colors relative z-10 cursor-target">
+          Скачать ↓
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join" class="relative py-24 px-6">
+  <div class="max-w-2xl mx-auto">
+    <div class="neon-border rounded-3xl p-8 md:p-12 text-center tilt-card">
+      <div class="relative z-10">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">ХОЧЕШЬ <span class="gradient-text">ВСТУПИТЬ?</span></h2>
+        <p class="text-gray-400 mb-8 max-w-xl mx-auto">Заполни заявку в Discord. Отвечаем в течение 24 часов.</p>
+        
+        <div class="flex justify-center mb-8">
+          <a href="https://discord.gg/triality" target="_blank" class="btn-primary text-black font-semibold px-10 py-4 rounded-xl text-lg inline-block cursor-target">Подать в Discord</a>
+        </div>
+        
+        <div class="pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-gray-400">
+          <div>✔ Возраст 16+</div>
+          <div>✔ Адекватность</div>
+          <div>✔ Актив</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative border-t border-white/5 py-10 px-6 text-center text-gray-500 text-sm">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex justify-center mb-4">
+      <div class="bg-black/50 border border-white/10 p-2 rounded-xl shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+        <img src="logo.png" onerror="this.style.display='none'" class="h-12 w-auto object-contain opacity-70 hover:opacity-100 transition">
+      </div>
+    </div>
+    <p class="mb-4">Семья Triality на GTA 5 RP · © 2026</p>
+    <div class="flex gap-6 justify-center font-medium">
+      <a href="https://discord.gg/triality" target="_blank" class="hover:text-purple-400 transition cursor-target">Discord</a>
+      <a href="https://www.youtube.com/@PepezHSS" target="_blank" class="hover:text-purple-400 transition cursor-target">YouTube</a>
+      <a href="https://t.me/pepez5rp" target="_blank" class="hover:text-purple-400 transition cursor-target">Telegram</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ЛАЙТБОКС (МОДАЛЬНОЕ ОКНО ДЛЯ КАРТИНОК) -->
+<div id="lightbox" class="fixed inset-0 z-[10000] bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+  <span id="close-lightbox" class="absolute top-5 right-10 text-5xl text-white cursor-pointer hover:text-purple-500 transition-colors pointer-events-auto">&times;</span>
+  <img id="lightbox-img" src="" alt="Zoomed Image" class="max-w-full max-h-[90vh] rounded-xl border-2 border-purple-500/50 shadow-[0_0_50px_rgba(168,85,247,0.5)] pointer-events-none">
+</div>
+
+<script>
+  // --- ЗАЩИТА ОТ КОПИРОВАНИЯ ТЕКСТА ---
+  document.addEventListener('contextmenu', event => event.preventDefault());
+  document.addEventListener('copy', event => event.preventDefault());
+  document.addEventListener('cut', event => event.preventDefault());
+  document.addEventListener('dragstart', event => event.preventDefault());
+
+  // --- ЭФФЕКТ ВОЛНЫ ПРИ КЛИКЕ ---
+  document.addEventListener('click', function(e) {
+    const ripple = document.createElement('div');
+    ripple.classList.add('ripple');
+    ripple.style.left = `${e.clientX}px`;
+    ripple.style.top = `${e.clientY}px`;
+    document.body.appendChild(ripple);
+    
+    setTimeout(() => { ripple.remove(); }, 600);
+  });
+
+  // --- КАСТОМНЫЙ КУРСОР ---
+  const cursorDot = document.getElementById('cursor-dot');
+  const cursorRing = document.getElementById('cursor-ring');
+  const clickables = document.querySelectorAll('a, button, .cursor-target');
+
+  if (window.innerWidth > 768) {
+    window.addEventListener('mousemove', (e) => {
+      const posX = e.clientX;
+      const posY = e.clientY;
+      cursorDot.style.left = `${posX}px`;
+      cursorDot.style.top = `${posY}px`;
+      cursorRing.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 300, fill: 'forwards' });
+    });
+    clickables.forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+    });
+  }
+
+  // --- ПАРАЛЛАКС ОТ МЫШИ ---
+  const blob1 = document.getElementById('blob1');
+  const blob2 = document.getElementById('blob2');
+  document.addEventListener('mousemove', (e) => {
+    const x = (window.innerWidth - e.pageX * 2) / 100;
+    const y = (window.innerHeight - e.pageY * 2) / 100;
+    if (blob1 && blob2) {
+      blob1.style.transform = `translate(${x}px, ${y}px)`;
+      blob2.style.transform = `translate(${-x}px, ${-y}px)`;
+    }
+  });
+
+  // --- КИБЕРПАНК-ДОЖДЬ ---
+  const rainContainer = document.getElementById('rain-container');
+  for (let i = 0; i < 50; i++) {
+    const drop = document.createElement('div');
+    drop.classList.add('rain-drop');
+    drop.style.left = `${Math.random() * 100}vw`;
+    drop.style.animationDuration = `${Math.random() * 0.5 + 0.5}s`;
+    drop.style.animationDelay = `${Math.random() * 2}s`;
+    drop.style.opacity = Math.random() * 0.5 + 0.2;
+    if (Math.random() > 0.5) drop.style.background = 'linear-gradient(to bottom, transparent, rgba(168, 85, 247, 0.8))';
+    rainContainer.appendChild(drop);
+  }
+
+  // --- СБОЙ ЭКРАНА (ГЛИТЧ) - РАЗ В 30 СЕКУНД ---
+  setInterval(() => {
+    document.body.classList.add('glitch-active');
+    setTimeout(() => document.body.classList.remove('glitch-active'), 250);
+  }, 30000);
+
+  // --- ЧАСТИЦЫ ---
+  const particlesContainer = document.getElementById('particles-container');
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    const size = Math.random() * 4 + 1;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${Math.random() * 100}vw`;
+    particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+    particle.style.animationDelay = `${Math.random() * 10}s`;
+    if (Math.random() > 0.5) {
+      particle.style.background = '#22d3ee';
+      particle.style.boxShadow = '0 0 10px #22d3ee';
+    }
+    particlesContainer.appendChild(particle);
+  }
+
+  // --- 3D НАКЛОН КАРТОЧЕК (TILT) ---
+  if (window.innerWidth > 768) {
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -10; 
+        const rotateY = ((x - centerX) / centerX) * 10;  
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+        card.style.transition = 'transform 0.5s ease'; 
+      });
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'none'; 
+      });
+    });
+  }
+
+  // --- ПЕЧАТНАЯ МАШИНКА ---
+  window.addEventListener('DOMContentLoaded', () => {
+    const text = "Коллектив в котором ты можешь раскрыть свой потенциал.";
+    const element = document.getElementById('typewriter-text');
+    let i = 0;
+    element.innerHTML = '';
+    function type() {
+      if (i < text.length) {
+        element.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 40); 
+      }
+    }
+    type();
+  });
+
+  // --- МОБИЛЬНОЕ МЕНЮ ---
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+  
+  // --- АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ---
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { 
+        entry.target.classList.add('visible'); 
+        observer.unobserve(entry.target); 
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // --- УМНОЕ МЕНЮ (SCROLLSPY) ---
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    const scrollY = window.pageYOffset;
+
+    sections.forEach(section => {
+      const sectionHeight = section.offsetHeight;
+      const sectionTop = section.offsetTop - 150;
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+
+  // --- ЛАЙТБОКС (ОТКРЫТИЕ КАРТИНОК) ---
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeLightbox = document.getElementById('close-lightbox');
+  const historyWrappers = document.querySelectorAll('.history-img-wrapper');
+
+  historyWrappers.forEach(wrapper => {
+    wrapper.addEventListener('click', () => {
+      const img = wrapper.querySelector('img');
+      if (img && img.style.display !== 'none') {
+        lightboxImg.src = img.src;
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden'; 
+      }
+    });
+  });
+
+  const closeModal = () => {
+    lightbox.classList.remove('flex');
+    lightbox.classList.add('hidden');
+    document.body.style.overflow = ''; 
+  };
+
+  closeLightbox.addEventListener('click', closeModal);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeModal();
+  });
+</script>
+</body>
+</html>
