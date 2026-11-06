@@ -40,9 +40,8 @@
     100% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
   }
 
-  /* --- HUD ИНТЕРФЕЙС (БЕЗ РАДАРА) --- */
+  /* --- HUD ИНТЕРФЕЙС --- */
   .hud-text { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: rgba(34, 211, 238, 0.4); text-transform: uppercase; letter-spacing: 1px; pointer-events: none; z-index: 9991; position: fixed; }
-  
   .hud-tl { top: 20px; left: 20px; border-left: 2px solid rgba(34, 211, 238, 0.4); padding-left: 8px; }
   .hud-tr { top: 20px; right: 20px; text-align: right; border-right: 2px solid rgba(34, 211, 238, 0.4); padding-right: 8px; }
   .hud-bl { bottom: 20px; left: 20px; }
@@ -258,6 +257,42 @@
     <div class="marquee-item">TRIALITY <span>•</span> GTA 5 RP <span>•</span> СЕРВЕР BLAINE <span>•</span> НАБОР ОТКРЫТ <span>•</span> </div>
   </div>
 </div>
+
+<!-- СТАТИСТИКА (ДАШБОРД) -->
+<section class="relative py-12 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+      
+      <!-- Карточка 1: Установки модов -->
+      <div class="bg-[#111116] border border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg">
+        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mb-4 text-gray-400">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+        </div>
+        <div class="text-3xl md:text-4xl font-bold text-white mb-1" style="font-family:'Rajdhani';">2 105 368</div>
+        <div class="text-[11px] text-gray-500 uppercase tracking-widest font-bold">Установок Triality MODS</div>
+      </div>
+
+      <!-- Карточка 2: Посещения -->
+      <div class="bg-[#111116] border border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg">
+        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mb-4 text-gray-400">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+        </div>
+        <div class="text-3xl md:text-4xl font-bold text-white mb-1" style="font-family:'Rajdhani';">135 517</div>
+        <div class="text-[11px] text-gray-500 uppercase tracking-widest font-bold">Посещений</div>
+      </div>
+
+      <!-- Карточка 3: Скачивания Perekup -->
+      <div class="bg-[#111116] border border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg">
+        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mb-4 text-gray-400">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        </div>
+        <div class="text-3xl md:text-4xl font-bold text-white mb-1" style="font-family:'Rajdhani';">42 889</div>
+        <div class="text-[11px] text-gray-500 uppercase tracking-widest font-bold">Triality Perekup</div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- ABOUT -->
 <section id="about" class="relative py-24 px-6">
