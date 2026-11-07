@@ -465,15 +465,15 @@
         <div class="relative z-10">
           <div class="flex items-center justify-between mb-4">
             <div class="w-14 h-14 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center overflow-hidden">
-              <img src="app-logo.png" onerror="this.style.display='none'" class="w-10 h-10 object-contain opacity-50">
+              <img src="app-logo.png" onerror="this.style.display='none'" class="w-10 h-10 object-contain">
             </div>
-            <span class="text-xs px-2 py-1 rounded bg-gray-500/20 text-gray-400">В РАЗРАБОТКЕ</span>
+            <span class="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">ПАРОЛЬ 🔒</span>
           </div>
           <h3 class="text-xl font-bold mb-2">TRIALITY MODS</h3>
           <p class="text-gray-400 text-sm mb-6">Сборник модов и скриптов для комфортной игры на сервере.</p>
         </div>
-        <button onclick="alert('TrialityMods находится в разработке. Следите за обновлениями в нашем Discord!')" class="w-full h-12 flex items-center justify-center bg-white/5 border border-white/10 text-gray-400 rounded-lg text-sm font-medium hover:bg-white/10 transition cursor-not-allowed relative z-10 cursor-target">
-          В разработке ⏳
+        <button onclick="checkModsPassword()" class="w-full h-12 flex items-center justify-center bg-transparent border border-white/15 text-gray-300 rounded-lg text-sm font-medium hover:border-purple-500 hover:bg-purple-500/10 transition-colors relative z-10 cursor-target">
+          Скачать ↓
         </button>
       </div>
 
@@ -531,7 +531,7 @@
     <div class="flex gap-6 justify-center font-medium">
       <a href="https://discord.gg/triality" target="_blank" class="hover:text-purple-400 transition cursor-target">Discord</a>
       <a href="https://www.youtube.com/@PepezHSS" target="_blank" class="hover:text-purple-400 transition cursor-target">YouTube</a>
-      <a href="https://t.me/pepez5rp" target="_blank" class="hover:text-purple-400 transition cursor-target">Telegram</a>
+      <a href="https://t.me/trialitymods" target="_blank" class="hover:text-purple-400 transition cursor-target">Telegram</a>
     </div>
   </div>
 </footer>
@@ -543,6 +543,21 @@
 </div>
 
 <script>
+  // --- ПРОВЕРКА ПАРОЛЯ ДЛЯ TRIALITY MODS ---
+  function checkModsPassword() {
+    const correctPassword = "lambronoowner"; 
+    const downloadLink = "https://github.com/oleksholo-svg/triality-mods-catalog/releases/download/app/TrialityMods-Setup.exe"; 
+
+    const userPassword = prompt("Введите пароль для скачивания TRIALITY MODS:");
+    if (userPassword === null) return;
+
+    if (userPassword === correctPassword) {
+      window.location.href = downloadLink;
+    } else {
+      alert("Неверный пароль! Попроси его у лидера семьи в Discord.");
+    }
+  }
+
   // --- ЗАЩИТА ОТ КОПИРОВАНИЯ ТЕКСТА ---
   document.addEventListener('contextmenu', event => event.preventDefault());
   document.addEventListener('copy', event => event.preventDefault());
