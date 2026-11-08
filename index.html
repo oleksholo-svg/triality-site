@@ -21,7 +21,15 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+body{
+  margin:0;
+  /* Запрет выделения текста на всем сайте */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+img{max-width:100%}[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;overflow-x:hidden}
 .wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -83,10 +91,12 @@ h1.title span{display:inline-block}
 .side.l{left:1%}.side.r{right:1%;text-align:right}
 .side span{display:block}
 
+/* Ticker: движение слева направо */
 .ticker{overflow:hidden;border-block:1px solid rgba(180,77,255,.25);background:rgba(25,10,40,.5);margin:26px 0 0;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
 .ticker div{display:flex;width:max-content;animation:marquee 28s linear infinite}
 .ticker span{font-family:var(--f-logo);font-size:12px;letter-spacing:.3em;color:var(--ink2);padding:12px 0;white-space:nowrap}
 .ticker b{color:var(--vio2);font-weight:400;padding:0 18px}
+@keyframes marquee{from{transform:translateX(-50%)}to{transform:translateX(0%)}}
 
 .about{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(20px,4vw,48px);align-items:center;margin-top:clamp(-150px,-11vw,-40px)}
 .about h2{font-family:var(--f-head);font-weight:700;font-size:clamp(30px,5.2vw,60px);line-height:1.02;margin:0;text-align:right;letter-spacing:-.01em;text-shadow:0 4px 30px rgba(0,0,0,.7)}
@@ -126,12 +136,14 @@ h1.title span{display:inline-block}
 .app:hover{box-shadow:0 0 8px #f3d0ff,0 0 32px rgba(200,90,255,1),0 0 80px rgba(160,60,240,.6),inset 0 0 22px rgba(190,80,255,.6),inset 0 0 60px rgba(120,30,200,.3)}
 .app:hover .glare{opacity:1}
 .app:hover .pic{transform:scale(1.06)}
-.app .in{position:relative;padding-left:7%;max-width:60%;transform:translateZ(30px)}
+.app .in{position:relative;padding-left:7%;max-width:60%;transform:translateZ(30px);z-index:10}
 .app h3{margin:0;font-family:"Montserrat",var(--f-head);font-style:italic;font-weight:800;font-size:clamp(26px,8.2cqi,110px);line-height:.98;letter-spacing:-.005em}
 .app h3 .t1{display:block;background:linear-gradient(180deg,#fff 0%,#f1eef6 38%,#8d8799 52%,#dcd7e4 70%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}
 .app h3 .t2{display:block;background:linear-gradient(180deg,#f3d9ff 0%,#c46bff 42%,#7a1fc9 58%,#d88dff 85%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(190,80,255,.55))}
 .app p{margin:6cqi 0 0;font-family:"Montserrat",var(--f-body);font-weight:500;font-size:clamp(13px,3.15cqi,40px);line-height:1.3;color:#f4eefb}
-.go{display:inline-flex;align-items:center;gap:clamp(10px,2.4cqi,26px);margin-top:6.5cqi;height:clamp(40px,7.2cqi,96px);padding:0 clamp(18px,4cqi,48px);font-family:"Montserrat",var(--f-body);font-weight:500;font-size:clamp(14px,2.9cqi,36px);color:#fff;border-radius:99px;border:2px solid #f0cfff;
+
+/* Кнопка скачать (исправлена кликабельность) */
+.go{position:relative;z-index:20;display:inline-flex;align-items:center;gap:clamp(10px,2.4cqi,26px);margin-top:6.5cqi;height:clamp(40px,7.2cqi,96px);padding:0 clamp(18px,4cqi,48px);font-family:"Montserrat",var(--f-body);font-weight:500;font-size:clamp(14px,2.9cqi,36px);color:#fff;border-radius:99px;border:2px solid #f0cfff;
   box-shadow:0 0 6px #e9b6ff,0 0 16px rgba(190,80,255,.7),inset 0 0 10px rgba(190,80,255,.45);transition:box-shadow .35s,background .35s}
 .go svg{width:clamp(22px,4.6cqi,56px);height:auto;flex:none;stroke:#fff;fill:none;stroke-width:2;transition:transform .45s var(--ease)}
 .go:hover{background:rgba(160,60,240,.3);box-shadow:0 0 8px #f3d0ff,0 0 26px rgba(200,90,255,1),inset 0 0 14px rgba(190,80,255,.6)}
@@ -151,27 +163,17 @@ h1.title span{display:inline-block}
 .links a:hover{border-color:var(--vio2);box-shadow:0 0 14px rgba(180,77,255,.6)}
 .links svg{width:14px;height:14px;fill:currentColor}
 
-.hist{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center}
-.circ{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(20,10,32,.7);display:grid;place-items:center;transition:box-shadow .3s,border-color .3s}
-.circ:hover{border-color:var(--vio2);box-shadow:0 0 16px rgba(180,77,255,.6)}
-.circ svg{width:16px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5}
-.track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 36px)/3);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:14px 2px 40px;margin-bottom:-26px}
-.track::-webkit-scrollbar{display:none}
-.ph{scroll-snap-align:start;position:relative;aspect-ratio:4/3;border-radius:14px;border:1px solid var(--line);overflow:hidden;cursor:zoom-in;transition:transform .5s var(--ease),border-color .4s,box-shadow .5s;
+/* История: сетка (таблица) вместо слайдера */
+.hist{position:relative;display:block}
+.track{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;padding:10px 0}
+.ph{position:relative;aspect-ratio:4/3;border-radius:14px;border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:transform .5s var(--ease),border-color .4s,box-shadow .5s;
   background:radial-gradient(ellipse at 50% 120%,rgba(200,110,255,.55),transparent 60%),linear-gradient(180deg,#24103a,#100818)}
 .ph .bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1s var(--ease)}
-.ph::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,rgba(10,4,18,.85))}
+.ph::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,rgba(10,4,18,.85));pointer-events:none}
 .ph span{position:absolute;left:14px;bottom:10px;z-index:1;font-family:var(--f-head);font-size:12px;color:var(--vio2);letter-spacing:.08em}
-.ph.on,.ph:hover{transform:translateY(-8px);border-color:rgba(214,150,255,.9);box-shadow:0 18px 40px -18px rgba(180,77,255,.9)}
+.ph:hover{transform:translateY(-4px);border-color:rgba(214,150,255,.9);box-shadow:0 18px 40px -18px rgba(180,77,255,.9)}
 .ph:hover .bg{transform:scale(1.06)}
-.zoom{position:fixed;z-index:45;left:0;top:0;border-radius:18px;overflow:hidden;pointer-events:none;opacity:0;transform-origin:0 0;border:2px solid #e9b6ff;
-  background:radial-gradient(ellipse at 50% 120%,rgba(200,110,255,.55),transparent 60%),linear-gradient(180deg,#24103a,#100818);background-size:cover;background-position:center;
-  box-shadow:0 0 10px #e9b6ff,0 0 40px rgba(180,77,255,.8),0 30px 80px rgba(0,0,0,.7);transition:transform .45s var(--ease),opacity .3s}
-.zoom.on{opacity:1;transform:none!important}
-.zoom span{position:absolute;left:18px;bottom:14px;font-family:var(--f-head);font-size:14px;color:var(--vio2);letter-spacing:.08em;text-shadow:0 1px 6px #000}
-.dots{display:flex;justify-content:center;gap:6px;margin-top:6px}
-.dots i{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.25);transition:width .4s var(--ease),background .4s}
-.dots i.on{width:22px;background:var(--vio2)}
+.dots{display:none} /* Скрыто для таблицы */
 
 .join{text-align:center;margin-top:70px}
 .join h2{font-family:var(--f-head);font-weight:700;font-size:clamp(26px,4vw,42px);margin:0}
@@ -180,8 +182,10 @@ h1.title span{display:inline-block}
 .req span{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:7px 14px;border-radius:99px;border:1px solid var(--line);background:rgba(40,16,62,.5)}
 .req svg{width:14px;height:14px;stroke:var(--vio2);fill:none;stroke-width:2.2}
 .cta{display:flex;justify-content:center;align-items:center;gap:26px;flex-wrap:wrap;margin:34px 0 30px}
+
+/* Кнопка "Присоединиться" (исправлена кликабельность блика) */
 .big{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:18px;padding:18px 46px;border-radius:99px;font-family:var(--f-head);font-weight:500;font-size:clamp(16px,2.4vw,26px);letter-spacing:.04em;border:1.5px solid #d08cff;background:linear-gradient(180deg,rgba(150,60,230,.55),rgba(70,20,120,.6));animation:breathe 3.2s ease-in-out infinite}
-.big::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-130%);animation:shine 4s 1.5s ease-in-out infinite}
+.big::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-130%);animation:shine 4s 1.5s ease-in-out infinite;pointer-events:none}
 .big svg{width:28px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6;transition:transform .4s var(--ease)}
 .big:hover svg{transform:translateX(8px)}
 
@@ -267,7 +271,6 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
 @keyframes breathe{0%,100%{box-shadow:0 0 18px rgba(180,77,255,.45),inset 0 0 14px rgba(220,160,255,.25)}50%{box-shadow:0 0 42px rgba(180,77,255,.85),inset 0 0 22px rgba(220,160,255,.45)}}
 @keyframes shine{0%,60%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
 @keyframes drift{to{transform:translateX(18%)}}
-@keyframes marquee{to{transform:translateX(-50%)}}
 @keyframes blink{50%{opacity:.35}}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
@@ -288,8 +291,7 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
   .apps,.media{grid-template-columns:1fr}
   .app .in{max-width:65%}
   .shot{aspect-ratio:auto;min-height:230px}
-  .track{grid-auto-columns:78%}
-  .hist{grid-template-columns:minmax(0,1fr)}.hist .circ{display:none}
+  .hist{grid-template-columns:minmax(0,1fr)}
   .shead{flex-direction:column;align-items:flex-start;gap:10px}.shead p{border-left:0;padding-left:0}
 }
 @media (max-width:420px){.logo{font-size:14px}.pill.solid{padding:7px 12px;font-size:12px}}
@@ -407,12 +409,9 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
   <section class="wrap" id="history">
     <div class="shead rv"><h2>ИСТОРИЯ</h2><p>Моменты, которые мы пережили вместе.</p></div>
     <div class="hist rv">
-      <button class="circ" id="prev" aria-label="Предыдущие фото"><svg viewBox="0 0 16 12"><path d="M16 6H1M5 1 0 6l5 5"/></svg></button>
+      <!-- Сетка фотографий -->
       <div class="track" id="track"></div>
-      <button class="circ" id="next" aria-label="Следующие фото"><svg viewBox="0 0 16 12"><path d="M0 6h15M11 1l5 5-5 5"/></svg></button>
     </div>
-    <div class="dots" id="dots" aria-hidden="true"></div>
-    <div class="zoom" id="zoom" aria-hidden="true"><span></span></div>
   </section>
 
   <section class="wrap join" id="join">
@@ -424,7 +423,8 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
       <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Актив</span>
     </div>
     <div class="cta rv">
-      <a class="big" href="https://discord.gg/triality" target="_blank" rel="noopener">ПРИСОЕДИНИТЬСЯ <svg viewBox="0 0 28 16"><path d="M0 8h26M19 1l7 7-7 7"/></svg></a>
+      <!-- Исправлена ссылка Discord -->
+      <a class="big" href="https://discord.com/invite/triality" target="_blank" rel="noopener">ПРИСОЕДИНИТЬСЯ <svg viewBox="0 0 28 16"><path d="M0 8h26M19 1l7 7-7 7"/></svg></a>
     </div>
   </section>
 </main>
@@ -432,7 +432,8 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
 <footer>
   <div class="foot-t">TRIALITY &nbsp;/&nbsp; GTA 5 RP BLAINE</div>
   <div class="foot-l">
-    <a href="https://discord.gg/triality" target="_blank" rel="noopener">Discord</a>
+    <!-- Исправлена ссылка Discord -->
+    <a href="https://discord.gg/Wehhq7qqGY" target="_blank" rel="noopener">Discord</a>
     <a href="https://www.youtube.com/@PepezHSS" target="_blank" rel="noopener">YouTube</a>
     <a href="https://t.me/trialitymods" target="_blank" rel="noopener">Telegram</a>
   </div>
@@ -483,43 +484,26 @@ document.querySelectorAll('[data-tilt]').forEach(c=>{
 const fig=document.getElementById('art').firstElementChild;
 addEventListener('pointermove',e=>{if(reduce||e.pointerType!=='mouse')return;const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;fig.style.translate=`${x*-14}px ${y*-10}px`},{passive:true});
 
-/* история: 15 фото в корне репозитория (1.jpg … 15.jpg) */
+/* История: 15 фото в корне репозитория (1.jpg … 15.jpg) */
 const N=15,photos=Array.from({length:N},(_,i)=>`${i+1}.jpg`);
-const tr=document.getElementById('track'),dots=document.getElementById('dots');
-tr.innerHTML=photos.map((s,i)=>`<button class="ph${i?'':' on'}" data-i="${i}" aria-label="Открыть фото ${i+1} из ${N}"><div class="bg" style="background-image:url(${s})"></div><span>${String(i+1).padStart(2,'0')} / ${N}</span></button>`).join('');
-dots.innerHTML=photos.map((_,i)=>`<i${i?'':' class="on"'}></i>`).join('');
-const cards=[...tr.children],dl=[...dots.children];let idx=0;
-function mark(i){idx=(i+N)%N;cards.forEach((c,j)=>c.classList.toggle('on',j===idx));dl.forEach((d,j)=>d.classList.toggle('on',j===idx))}
-function go(d){mark(idx+d);tr.scrollTo({left:cards[idx].offsetLeft-tr.offsetLeft-2,behavior:reduce?'auto':'smooth'})}
-document.getElementById('prev').onclick=()=>go(-1);document.getElementById('next').onclick=()=>go(1);
-let st;tr.addEventListener('scroll',()=>{clearTimeout(st);st=setTimeout(()=>{const w=cards[0].offsetWidth+18;mark(Math.round(tr.scrollLeft/w))},90)},{passive:true});
-let auto=reduce?null:setInterval(()=>{if(!document.hidden&&!lb.classList.contains('open'))go(1)},4500);
-tr.addEventListener('pointerenter',()=>{clearInterval(auto);auto=null});
+const tr=document.getElementById('track');
+tr.innerHTML=photos.map((s,i)=>`<button class="ph" data-i="${i}" aria-label="Открыть фото ${i+1} из ${N}"><div class="bg" style="background-image:url(${s})"></div><span>${String(i+1).padStart(2,'0')} / ${N}</span></button>`).join('');
 
-
-/* наведение на фото истории: увеличение в 4 раза (вписывается в экран) */
-const zm=document.getElementById('zoom'),zl=zm.querySelector('span');let zCard=null;
-function zoomIn(card){if(reduce)return;zCard=card;const r=card.getBoundingClientRect(),ar=r.height/r.width;
-  const hh=document.querySelector('header').getBoundingClientRect().bottom;let fw=r.width*4,fh=fw*ar;const mw=innerWidth-32,mh=innerHeight-hh-32;const k=Math.min(1,mw/fw,mh/fh);fw*=k;fh*=k;
-  const cx=r.left+r.width/2,cy=r.top+r.height/2;const fx=Math.min(Math.max(16,cx-fw/2),innerWidth-16-fw),fy=Math.min(Math.max(hh+16,cy-fh/2),innerHeight-16-fh);
-  zm.style.cssText=`width:${fw}px;height:${fh}px;left:${fx}px;top:${fy}px;background-image:${getComputedStyle(card.querySelector('.bg')).backgroundImage},radial-gradient(ellipse at 50% 120%,rgba(200,110,255,.55),transparent 60%),linear-gradient(180deg,#24103a,#100818);transition:none;transform:translate(${r.left-fx}px,${r.top-fy}px) scale(${r.width/fw})`;
-  zl.textContent=card.querySelector('span').textContent;void zm.offsetWidth;zm.style.transition='';zm.classList.add('on')}
-function zoomOut(){if(!zCard)return;const r=zCard.getBoundingClientRect(),fx=parseFloat(zm.style.left),fy=parseFloat(zm.style.top),fw=parseFloat(zm.style.width);
-  zm.classList.remove('on');zm.style.transform=`translate(${r.left-fx}px,${r.top-fy}px) scale(${r.width/fw})`;zCard=null}
-cards.forEach(c=>{c.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')zoomIn(c)});c.addEventListener('pointerleave',zoomOut);c.addEventListener('click',zoomOut)});
-addEventListener('scroll',zoomOut,{passive:true});tr.addEventListener('scroll',zoomOut,{passive:true});
+const cards=[...tr.children];
 const lb=document.getElementById('lb'),li=document.getElementById('lbImg'),lc=document.getElementById('lbC');let li_i=0,lastFocus;
 function show(i){li_i=(i+N)%N;li.src=photos[li_i];li.alt=`Фото ${li_i+1} из истории семьи`;lc.textContent=`${li_i+1} / ${N}`}
 function open(i){lastFocus=document.activeElement;show(i);lb.hidden=false;requestAnimationFrame(()=>lb.classList.add('open'));document.getElementById('lbX').focus()}
 function close(){lb.classList.remove('open');setTimeout(()=>{lb.hidden=true},350);lastFocus&&lastFocus.focus()}
+
+/* Обработчик клика по сетке */
 tr.addEventListener('click',e=>{const b=e.target.closest('.ph');if(b)open(+b.dataset.i)});
+
 document.getElementById('lbX').onclick=close;
 document.getElementById('lbP').onclick=()=>show(li_i-1);document.getElementById('lbN').onclick=()=>show(li_i+1);
 lb.addEventListener('click',e=>{if(e.target===lb)close()});
 addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(li_i-1);if(e.key==='ArrowRight')show(li_i+1)});
 
 document.getElementById('modsDl').addEventListener('click',e=>{e.preventDefault()});
-
 
 /* видео героя: при «меньше движения» стоит на первом кадре */
 const gv=document.getElementById('groundVid');
