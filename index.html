@@ -169,7 +169,7 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
 .foot-l{display:flex;justify-content:center;gap:22px;margin:16px 0 8px;font-size:13px}
 .foot-l a{color:var(--ink2);transition:color .3s}.foot-l a:hover{color:var(--vio2)}
 .copy{font-size:12px;color:var(--muted);padding-bottom:18px}
-.ground{position:relative;z-index:-1;height:clamp(170px,26vw,340px);margin-top:clamp(-150px,-12vw,-70px);background:url(assets/ground.jpg) center bottom/cover;overflow:hidden;
+.ground{position:relative;z-index:-1;height:clamp(170px,26vw,340px);margin-top:clamp(-150px,-12vw,-70px);background:url(ground.jpg) center bottom/cover;overflow:hidden;
   -webkit-mask:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.08) 22%,rgba(0,0,0,.35) 40%,rgba(0,0,0,.75) 58%,#000 76%);mask:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.08) 22%,rgba(0,0,0,.35) 40%,rgba(0,0,0,.75) 58%,#000 76%)}
 .ground::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 100%,rgba(150,60,230,.35),transparent 70%)}
 .ground::after{content:"";position:absolute;inset:auto 0 0;height:30%;background:linear-gradient(transparent,var(--bg))}
@@ -297,7 +297,7 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
 <main id="top">
   <section class="hero">
     <div class="stage" id="stage">
-      <div class="art" id="art" aria-hidden="true"><video class="vid" id="heroVid" autoplay muted loop playsinline preload="auto" poster="assets/hero-full.jpg"><source src="assets/hero-loop.mp4" type="video/mp4"></video></div>
+      <div class="art" id="art" aria-hidden="true"><video class="vid" id="heroVid" autoplay muted loop playsinline preload="auto" poster="hero-full.jpg"><source src="hero-loop.mp4" type="video/mp4"></video></div>
       <div class="frame">
         <i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br brr"></i>
         <h1 class="title" id="title" aria-label="TRIALITY">TRIALITY</h1>
@@ -333,7 +333,7 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
     <div class="shead rv"><h2>ПРИЛОЖЕНИЯ</h2><p>Утилиты и программы от семьи Triality.</p></div>
     <div class="apps">
       <article class="app rv" data-tilt>
-        <div class="pic" style="background-image:url(assets/mods.jpg)"></div><div class="glare"></div>
+        <div class="pic" style="background-image:url(mods.jpg)"></div><div class="glare"></div>
         <div class="in">
           <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>ПАРОЛЬ</span>
           <h3>TRIALITY<br>MODS</h3>
@@ -343,7 +343,7 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
         </div>
       </article>
       <article class="app rv" data-tilt>
-        <div class="pic" style="background-image:url(assets/perekup.jpg)"></div><div class="glare"></div>
+        <div class="pic" style="background-image:url(perekup.jpg)"></div><div class="glare"></div>
         <div class="in">
           <span class="chip">BETA TEST</span>
           <h3>TRIALITY<br>PEREKUP</h3>
@@ -360,7 +360,7 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
     <div class="shead rv"><h2>МЕДИА</h2><p>Контент, обзоры, события<br>и лучшие моменты на Blaine.</p></div>
     <div class="creators">
       <article class="cr pep rv">
-        <div class="cr-art"><img src="assets/pepez-avatar.png" alt="Аватар PEPEZ" loading="lazy"></div>
+        <div class="cr-art"><img src="pepez-avatar.png" alt="Аватар PEPEZ" loading="lazy"></div>
         <div class="cr-in">
           <h3 class="cr-name">PEPEZ</h3>
           <div class="cr-handle">@PepezHSS</div>
@@ -373,7 +373,7 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
         </div>
       </article>
       <article class="cr poch rv">
-        <div class="cr-art"><img src="assets/pochemy-card.png" alt="Аватар POCHEMYCHKA???" loading="lazy"></div>
+        <div class="cr-art"><img src="pochemy-card.png" alt="Аватар POCHEMYCHKA???" loading="lazy"></div>
         <div class="cr-in">
           <h3 class="cr-name">POCHEMYCHKA???</h3>
           <div class="cr-handle">@pochemychkina</div>
@@ -432,6 +432,21 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
 </div>
 
 <script>
+  // --- ПРОВЕРКА ПАРОЛЯ ДЛЯ TRIALITY MODS ---
+  function checkModsPassword() {
+    const correctPassword = "lambronoowner"; 
+    const downloadLink = "https://github.com/oleksholo-svg/triality-mods-catalog/releases/download/app/TrialityMods-Setup.exe"; 
+
+    const userPassword = prompt("Введите пароль для скачивания TRIALITY MODS:");
+    if (userPassword === null) return;
+
+    if (userPassword === correctPassword) {
+      window.location.href = downloadLink;
+    } else {
+      alert("Неверный пароль! Попроси его у лидера семьи в Discord.");
+    }
+  }
+
 (function(){
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fmt=n=>n.toLocaleString('ru-RU');
