@@ -2,13 +2,13 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TRIALITY — GTA 5 RP BLAINE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TRIALITY — GTA 5 RP</title>
 <link rel="icon" type="image/png" href="logo.png">
-<script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* --- БАЗА --- */
   :root{
     --bg:#07040c; --ink:#f3ecff; --ink2:#bfb0d6; --muted:#8a7aa3;
     --vio:#b44dff; --vio2:#d58bff; --line:rgba(190,120,255,.35);
@@ -26,14 +26,19 @@
   /* --- ЗАЩИТА ОТ КОПИРОВАНИЯ --- */
   body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 
-  /* --- ФОН И СЕТКА --- */
+  /* --- ФОН С ФИГУРОЙ --- */
   .bg-hero {
-    background-image: url('hero-bg.jpg');
+    background-image: url('assets/hero.jpg');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
   }
-  
+  .bg-hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(7,4,12,0.3) 0%, rgba(7,4,12,0.9) 80%, var(--bg) 100%);
+    z-index: 1; pointer-events: none;
+  }
+
   /* --- НЕОНОВЫЕ РАМКИ --- */
   .neon-border {
     border: 1px solid rgba(168,85,247,0.3);
@@ -69,14 +74,14 @@
   }
   @keyframes hue { to { background-position: 300% 0; } }
 
+  /* --- ГАЛЕРЕЯ --- */
+  .gallery-item { transition: all 0.3s ease; }
+  .gallery-item:hover { transform: scale(1.03); box-shadow: 0 0 20px rgba(168,85,247,0.4); border-color: #a855f7; z-index: 10; }
+
   /* --- СКРОЛЛБАР --- */
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: #050308; }
   ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 4px; }
-
-  /* --- АНИМАЦИИ --- */
-  .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body class="relative bg-hero">
@@ -158,28 +163,29 @@
     
     <!-- Моды -->
     <div class="relative overflow-hidden rounded-2xl border border-[#a855f7]/30 bg-black/60 p-8 h-[300px] flex flex-col justify-between group cursor-pointer neon-border">
-      <div class="absolute inset-0 bg-[url('mods.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition duration-500"></div>
+      <div class="absolute inset-0 bg-[url('assets/mods.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition duration-500"></div>
       <div class="relative z-10">
         <h3 class="text-4xl font-head font-bold text-white leading-none mb-2">TRIALITY<br><span class="text-[#a855f7]">MODS</span></h3>
         <p class="text-xs text-gray-300 w-1/2">Наша модификация для комфортной и стабильной игры на Blaine.</p>
       </div>
       <div class="relative z-10 self-start mt-auto">
-        <button onclick="checkModsPassword()" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-[#a855f7] group-hover:border-[#a855f7] transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        <!-- Пароль на моды -->
+        <button onclick="checkModsPassword()" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-[#a855f7] group-hover:border-[#a855f7] transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
         </button>
       </div>
     </div>
 
     <!-- Перекуп -->
     <div class="relative overflow-hidden rounded-2xl border border-[#a855f7]/30 bg-black/60 p-8 h-[300px] flex flex-col justify-between group cursor-pointer neon-border">
-      <div class="absolute inset-0 bg-[url('perekup.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition duration-500"></div>
+      <div class="absolute inset-0 bg-[url('assets/perekup.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition duration-500"></div>
       <div class="relative z-10">
         <h3 class="text-4xl font-head font-bold text-white leading-none mb-2">TRIALITY<br><span class="text-[#a855f7]">PEREKUP</span></h3>
         <p class="text-xs text-gray-300 w-1/2">Умный перекуп-бот для выгодной торговли и контроля рынка.</p>
       </div>
       <div class="relative z-10 self-start mt-auto">
-        <a href="https://github.com/oleksholo-svg/TrialityPerekup/releases/download/v2.2.1/TrialityPerekup.exe" target="_blank" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-[#a855f7] group-hover:border-[#a855f7] transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        <a href="https://github.com/oleksholo-svg/TrialityPerekup/releases/download/v2.2.1/TrialityPerekup.exe" target="_blank" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-[#a855f7] group-hover:border-[#a855f7] transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
         </a>
       </div>
     </div>
@@ -233,53 +239,8 @@
     </div>
 
     <!-- Сетка 15 картинок -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
-      <!-- Код для картинок (вставь сюда 15 блоков) -->
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="1.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="2.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="3.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="4.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="5.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="6.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="7.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="8.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="9.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="10.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="11.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="12.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="13.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="14.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
-      <div class="relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square">
-        <img src="15.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-      </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8" id="gallery">
+      <!-- Сюда JS вставит картинки -->
     </div>
   </div>
 </section>
@@ -301,6 +262,12 @@
   </p>
 </footer>
 
+<!-- ЛАЙТБОКС -->
+<div id="lightbox" class="fixed inset-0 z-[10000] bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+  <span id="close-lightbox" class="absolute top-5 right-10 text-5xl text-white cursor-pointer hover:text-purple-500 transition-colors pointer-events-auto">&times;</span>
+  <img id="lightbox-img" src="" alt="Zoomed Image" class="max-w-full max-h-[90vh] rounded-xl border-2 border-purple-500/50 shadow-[0_0_50px_rgba(168,85,247,0.5)] pointer-events-none">
+</div>
+
 <script>
   // --- ПРОВЕРКА ПАРОЛЯ ДЛЯ TRIALITY MODS ---
   function checkModsPassword() {
@@ -317,21 +284,46 @@
     }
   }
 
-  // Защита от копирования
+  // --- ЗАЩИТА ОТ КОПИРОВАНИЯ ---
   document.addEventListener('contextmenu', event => event.preventDefault());
   document.addEventListener('copy', event => event.preventDefault());
   document.addEventListener('cut', event => event.preventDefault());
-  
-  // Анимация появления
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) { 
-        entry.target.classList.add('visible'); 
-        observer.unobserve(entry.target); 
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.addEventListener('dragstart', event => event.preventDefault());
+
+  // --- ГЕНЕРАЦИЯ ГАЛЕРЕИ (15 фото) ---
+  const galleryContainer = document.getElementById('gallery');
+  for (let i = 1; i <= 15; i++) {
+    const div = document.createElement('div');
+    div.className = "relative overflow-hidden rounded-xl border border-gray-800 cursor-pointer group aspect-square gallery-item";
+    div.innerHTML = `<img src="${i}.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">`;
+    galleryContainer.appendChild(div);
+  }
+
+  // --- ЛАЙТБОКС ---
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeLightbox = document.getElementById('close-lightbox');
+
+  galleryContainer.addEventListener('click', (e) => {
+    const img = e.target.closest('img');
+    if (img && img.style.display !== 'none') {
+      lightboxImg.src = img.src;
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+      document.body.style.overflow = 'hidden'; 
+    }
+  });
+
+  const closeModal = () => {
+    lightbox.classList.remove('flex');
+    lightbox.classList.add('hidden');
+    document.body.style.overflow = ''; 
+  };
+
+  closeLightbox.addEventListener('click', closeModal);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeModal();
+  });
 </script>
 </body>
 </html>
