@@ -23,7 +23,7 @@
 *{box-sizing:border-box}
 body{
   margin:0;
-  /* Запрет выделения текста на всем сайте */
+  /* Запрет выделения текста */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -91,12 +91,15 @@ h1.title span{display:inline-block}
 .side.l{left:1%}.side.r{right:1%;text-align:right}
 .side span{display:block}
 
-/* Ticker: движение слева направо */
+/* Live-лента (бегущая строка) */
 .ticker{overflow:hidden;border-block:1px solid rgba(180,77,255,.25);background:rgba(25,10,40,.5);margin:26px 0 0;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.ticker div{display:flex;width:max-content;animation:marquee 28s linear infinite}
+.ticker div{display:flex;width:max-content;animation:marquee 28s linear infinite;will-change:transform;}
 .ticker span{font-family:var(--f-logo);font-size:12px;letter-spacing:.3em;color:var(--ink2);padding:12px 0;white-space:nowrap}
 .ticker b{color:var(--vio2);font-weight:400;padding:0 18px}
-@keyframes marquee{from{transform:translateX(-50%)}to{transform:translateX(0%)}}
+@keyframes marquee{
+  from{transform:translate3d(-50%, 0, 0)}
+  to{transform:translate3d(0%, 0, 0)}
+}
 
 .about{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(20px,4vw,48px);align-items:center;margin-top:clamp(-150px,-11vw,-40px)}
 .about h2{font-family:var(--f-head);font-weight:700;font-size:clamp(30px,5.2vw,60px);line-height:1.02;margin:0;text-align:right;letter-spacing:-.01em;text-shadow:0 4px 30px rgba(0,0,0,.7)}
@@ -131,20 +134,30 @@ h1.title span{display:inline-block}
   transform-style:preserve-3d;transition:transform .5s var(--ease),box-shadow .5s;--mx:50%;--my:50%}
 .app::before,.cr::before{content:"";z-index:2;pointer-events:none;position:absolute;left:12%;right:12%;top:-2px;height:2px;background:linear-gradient(90deg,transparent,#fff,transparent);filter:blur(1px);box-shadow:0 0 18px 4px rgba(220,150,255,.8);opacity:.9}
 .app .pic{position:absolute;right:0;top:0;bottom:0;width:60%;background-size:cover;background-position:right center;transition:transform .9s var(--ease);
-  -webkit-mask:linear-gradient(90deg,transparent 0,rgba(0,0,0,.6) 18%,#000 34%);mask:linear-gradient(90deg,transparent 0,rgba(0,0,0,.6) 18%,#000 34%)}
+  -webkit-mask:linear-gradient(90deg,transparent 0,rgba(0,0,0,.6) 18%,#000 34%);mask:linear-gradient(90deg,transparent 0,rgba(0,0,0,.6) 18%,#000 34%);
+  pointer-events:none; /* Исправление: картинка больше не перекрывает клики */
+}
 .app .glare{position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(210,140,255,.2),transparent 45%);opacity:0;transition:opacity .4s;pointer-events:none}
 .app:hover{box-shadow:0 0 8px #f3d0ff,0 0 32px rgba(200,90,255,1),0 0 80px rgba(160,60,240,.6),inset 0 0 22px rgba(190,80,255,.6),inset 0 0 60px rgba(120,30,200,.3)}
 .app:hover .glare{opacity:1}
 .app:hover .pic{transform:scale(1.06)}
-.app .in{position:relative;padding-left:7%;max-width:60%;transform:translateZ(30px);z-index:10}
+.app .in{position:relative;padding-left:7%;max-width:60%;transform:translateZ(30px);z-index:10;pointer-events:none} /* Контейнер не перехватывает клики */
 .app h3{margin:0;font-family:"Montserrat",var(--f-head);font-style:italic;font-weight:800;font-size:clamp(26px,8.2cqi,110px);line-height:.98;letter-spacing:-.005em}
 .app h3 .t1{display:block;background:linear-gradient(180deg,#fff 0%,#f1eef6 38%,#8d8799 52%,#dcd7e4 70%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}
 .app h3 .t2{display:block;background:linear-gradient(180deg,#f3d9ff 0%,#c46bff 42%,#7a1fc9 58%,#d88dff 85%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(190,80,255,.55))}
 .app p{margin:6cqi 0 0;font-family:"Montserrat",var(--f-body);font-weight:500;font-size:clamp(13px,3.15cqi,40px);line-height:1.3;color:#f4eefb}
 
-/* Кнопка скачать (исправлена кликабельность) */
-.go{position:relative;z-index:20;display:inline-flex;align-items:center;gap:clamp(10px,2.4cqi,26px);margin-top:6.5cqi;height:clamp(40px,7.2cqi,96px);padding:0 clamp(18px,4cqi,48px);font-family:"Montserrat",var(--f-body);font-weight:500;font-size:clamp(14px,2.9cqi,36px);color:#fff;border-radius:99px;border:2px solid #f0cfff;
-  box-shadow:0 0 6px #e9b6ff,0 0 16px rgba(190,80,255,.7),inset 0 0 10px rgba(190,80,255,.45);transition:box-shadow .35s,background .35s}
+/* Исправленная кнопка скачивания */
+.go{
+  position:relative;z-index:20;pointer-events:auto; /* Возвращаем кликабельность самой кнопке */
+  display:inline-flex;align-items:center;gap:clamp(10px,2.4cqi,26px);margin-top:6.5cqi;
+  height:clamp(40px,7.2cqi,96px);padding:0 clamp(18px,4cqi,48px);
+  font-family:"Montserrat",var(--f-body);font-weight:500;font-size:clamp(14px,2.9cqi,36px);
+  color:#fff;border-radius:99px;border:2px solid #f0cfff;
+  box-shadow:0 0 6px #e9b6ff,0 0 16px rgba(190,80,255,.7),inset 0 0 10px rgba(190,80,255,.45);
+  transition:box-shadow .35s,background .35s;
+  cursor:pointer;
+}
 .go svg{width:clamp(22px,4.6cqi,56px);height:auto;flex:none;stroke:#fff;fill:none;stroke-width:2;transition:transform .45s var(--ease)}
 .go:hover{background:rgba(160,60,240,.3);box-shadow:0 0 8px #f3d0ff,0 0 26px rgba(200,90,255,1),inset 0 0 14px rgba(190,80,255,.6)}
 .go:hover svg,.app:hover .go svg{transform:translateX(18%)}
@@ -163,7 +176,7 @@ h1.title span{display:inline-block}
 .links a:hover{border-color:var(--vio2);box-shadow:0 0 14px rgba(180,77,255,.6)}
 .links svg{width:14px;height:14px;fill:currentColor}
 
-/* История: сетка (таблица) вместо слайдера */
+/* История (Сетка) */
 .hist{position:relative;display:block}
 .track{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;padding:10px 0}
 .ph{position:relative;aspect-ratio:4/3;border-radius:14px;border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:transform .5s var(--ease),border-color .4s,box-shadow .5s;
@@ -173,7 +186,6 @@ h1.title span{display:inline-block}
 .ph span{position:absolute;left:14px;bottom:10px;z-index:1;font-family:var(--f-head);font-size:12px;color:var(--vio2);letter-spacing:.08em}
 .ph:hover{transform:translateY(-4px);border-color:rgba(214,150,255,.9);box-shadow:0 18px 40px -18px rgba(180,77,255,.9)}
 .ph:hover .bg{transform:scale(1.06)}
-.dots{display:none} /* Скрыто для таблицы */
 
 .join{text-align:center;margin-top:70px}
 .join h2{font-family:var(--f-head);font-weight:700;font-size:clamp(26px,4vw,42px);margin:0}
@@ -183,7 +195,7 @@ h1.title span{display:inline-block}
 .req svg{width:14px;height:14px;stroke:var(--vio2);fill:none;stroke-width:2.2}
 .cta{display:flex;justify-content:center;align-items:center;gap:26px;flex-wrap:wrap;margin:34px 0 30px}
 
-/* Кнопка "Присоединиться" (исправлена кликабельность блика) */
+/* Кнопка "Присоединиться" */
 .big{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:18px;padding:18px 46px;border-radius:99px;font-family:var(--f-head);font-weight:500;font-size:clamp(16px,2.4vw,26px);letter-spacing:.04em;border:1.5px solid #d08cff;background:linear-gradient(180deg,rgba(150,60,230,.55),rgba(70,20,120,.6));animation:breathe 3.2s ease-in-out infinite}
 .big::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-130%);animation:shine 4s 1.5s ease-in-out infinite;pointer-events:none}
 .big svg{width:28px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6;transition:transform .4s var(--ease)}
@@ -295,7 +307,14 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
   .shead{flex-direction:column;align-items:flex-start;gap:10px}.shead p{border-left:0;padding-left:0}
 }
 @media (max-width:420px){.logo{font-size:14px}.pill.solid{padding:7px 12px;font-size:12px}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv.pre{opacity:1;transform:none}html{scroll-behavior:auto}}
+/* Для бегущей строки всегда включена анимация, даже если в системе включен режим "меньше движения" */
+@media (prefers-reduced-motion:reduce){
+  .fogfx i, .intro .nav, .intro h1.title span, .intro .sub, .intro .frame>.br, .intro .side span, .intro .art, .intro .about, .intro .stats, .art .vid, .rv.pre, .shot.lit::after, .cr::after, .promo .ok, .ph:hover {animation:none!important;transition:none!important}
+  .rv.pre{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+  /* Оставляем анимацию ленты */
+  .ticker div { animation: marquee 28s linear infinite !important; }
+}
 </style>
 </head>
 <body>
@@ -409,7 +428,6 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
   <section class="wrap" id="history">
     <div class="shead rv"><h2>ИСТОРИЯ</h2><p>Моменты, которые мы пережили вместе.</p></div>
     <div class="hist rv">
-      <!-- Сетка фотографий -->
       <div class="track" id="track"></div>
     </div>
   </section>
@@ -423,7 +441,6 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
       <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Актив</span>
     </div>
     <div class="cta rv">
-      <!-- Исправлена ссылка Discord -->
       <a class="big" href="https://discord.com/invite/triality" target="_blank" rel="noopener">ПРИСОЕДИНИТЬСЯ <svg viewBox="0 0 28 16"><path d="M0 8h26M19 1l7 7-7 7"/></svg></a>
     </div>
   </section>
@@ -432,7 +449,6 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
 <footer>
   <div class="foot-t">TRIALITY &nbsp;/&nbsp; GTA 5 RP BLAINE</div>
   <div class="foot-l">
-    <!-- Исправлена ссылка Discord -->
     <a href="https://discord.gg/Wehhq7qqGY" target="_blank" rel="noopener">Discord</a>
     <a href="https://www.youtube.com/@PepezHSS" target="_blank" rel="noopener">YouTube</a>
     <a href="https://t.me/trialitymods" target="_blank" rel="noopener">Telegram</a>
@@ -495,7 +511,6 @@ function show(i){li_i=(i+N)%N;li.src=photos[li_i];li.alt=`Фото ${li_i+1} и�
 function open(i){lastFocus=document.activeElement;show(i);lb.hidden=false;requestAnimationFrame(()=>lb.classList.add('open'));document.getElementById('lbX').focus()}
 function close(){lb.classList.remove('open');setTimeout(()=>{lb.hidden=true},350);lastFocus&&lastFocus.focus()}
 
-/* Обработчик клика по сетке */
 tr.addEventListener('click',e=>{const b=e.target.closest('.ph');if(b)open(+b.dataset.i)});
 
 document.getElementById('lbX').onclick=close;
@@ -505,12 +520,10 @@ addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')close();i
 
 document.getElementById('modsDl').addEventListener('click',e=>{e.preventDefault()});
 
-/* видео героя: при «меньше движения» стоит на первом кадре */
 const gv=document.getElementById('groundVid');
 if(reduce){gv.removeAttribute('autoplay');gv.pause()}else{const gp=gv.play();gp&&gp.catch(()=>{})}
 const hv=document.getElementById('heroVid');
 if(reduce){hv.removeAttribute('autoplay');hv.pause()}else{const pl=hv.play();pl&&pl.catch(()=>{})}
-
 
 document.querySelectorAll('.promo').forEach(b=>b.addEventListener('click',()=>{
   const code=b.dataset.code,ok=b.querySelector('.ok');
@@ -518,7 +531,7 @@ document.querySelectorAll('.promo').forEach(b=>b.addEventListener('click',()=>{
   const fallback=()=>{const r=document.createRange();r.selectNodeContents(b.querySelector('b'));const sel=getSelection();sel.removeAllRanges();sel.addRange(r);done('Выделено, нажмите Ctrl+C')};
   try{navigator.clipboard.writeText('/promo '+code).then(()=>done('Скопировано'),fallback)}catch(e){fallback()}
 }));
-/* фон: мерцающие звёзды (3 слоя с параллаксом), всплывающие искры, падающие звёзды */
+
 const cv=document.getElementById('stars'),cx=cv.getContext('2d');let W,H,D=1,F=[],P=[],SH=[],nextShoot=0;
 function size(){D=Math.min(2,devicePixelRatio||1);W=cv.width=innerWidth*D;H=cv.height=innerHeight*D;
   const n=Math.min(320,Math.round(innerWidth*innerHeight/5200));
