@@ -30,6 +30,9 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 :focus-visible{outline:2px solid var(--vio2);outline-offset:3px}
 section{scroll-margin-top:80px}
 
+/* ЗАЩИТА ОТ КОПИРОВАНИЯ */
+body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+
 #stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 main,header,footer{position:relative;z-index:1}
 
@@ -55,7 +58,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   -webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .art{position:absolute;top:0;bottom:0;left:50%;translate:-50% 0;height:100%;aspect-ratio:926/430;
   -webkit-mask:linear-gradient(to bottom,#000 58%,transparent 99%);mask:linear-gradient(to bottom,#000 58%,transparent 99%)}
-.art .img{position:absolute;inset:-2%;background:url(assets/hero-full.jpg) center/cover;will-change:transform}
+.art .img{position:absolute;inset:-2%;background:url(hero.jpg) center/cover;will-change:transform}
 .art .orb{position:absolute;left:55.8%;top:70%;width:18%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;
   background:radial-gradient(circle,rgba(230,170,255,.5) 0,rgba(180,77,255,.22) 42%,transparent 68%);mix-blend-mode:screen;pointer-events:none}
 .frame{position:absolute;left:7%;right:7%;top:8.6%;height:61%}
@@ -171,7 +174,7 @@ footer{position:relative;text-align:center}
 .foot-l{display:flex;justify-content:center;gap:22px;margin:16px 0 8px;font-size:13px}
 .foot-l a{color:var(--ink2);transition:color .3s}.foot-l a:hover{color:var(--vio2)}
 .copy{font-size:12px;color:var(--muted);padding-bottom:18px}
-.ground{position:relative;height:clamp(110px,18vw,230px);background:url(assets/ground.jpg) center bottom/cover;overflow:hidden}
+.ground{position:relative;height:clamp(110px,18vw,230px);background:url(ground.jpg) center bottom/cover;overflow:hidden}
 .fog{position:absolute;inset:-20% -50%;background:radial-gradient(40% 50% at 30% 70%,rgba(160,70,230,.35),transparent 70%),radial-gradient(35% 45% at 75% 60%,rgba(120,40,200,.3),transparent 70%);animation:drift 18s linear infinite alternate;mix-blend-mode:screen}
 .fog.b{animation-duration:26s;animation-direction:alternate-reverse;opacity:.7}
 
@@ -300,17 +303,17 @@ footer{position:relative;text-align:center}
     <div class="shead rv"><h2>ПРИЛОЖЕНИЯ</h2><p>Утилиты и программы от семьи Triality.</p></div>
     <div class="apps">
       <article class="app rv" data-tilt>
-        <div class="pic" style="background-image:url(assets/mods.jpg)"></div><div class="glare"></div>
+        <div class="pic" style="background-image:url(mods.jpg)"></div><div class="glare"></div>
         <div class="in">
           <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>ПАРОЛЬ</span>
           <h3>TRIALITY<br>MODS</h3>
           <p>Сборник модов и скриптов для комфортной игры на сервере.</p>
           <div class="num"><b data-count="2105368">2 105 368</b> установок</div>
-          <a class="dl" href="#" id="modsDl">Скачать <svg viewBox="0 0 12 14"><path d="M6 0v12M1 7l5 5 5-5"/></svg></a>
+          <button onclick="checkModsPassword()" class="dl">Скачать <svg viewBox="0 0 12 14"><path d="M6 0v12M1 7l5 5 5-5"/></svg></button>
         </div>
       </article>
       <article class="app rv" data-tilt>
-        <div class="pic" style="background-image:url(assets/perekup.jpg)"></div><div class="glare"></div>
+        <div class="pic" style="background-image:url(perekup.jpg)"></div><div class="glare"></div>
         <div class="in">
           <span class="chip">BETA TEST</span>
           <h3>TRIALITY<br>PEREKUP</h3>
@@ -326,7 +329,7 @@ footer{position:relative;text-align:center}
     <div class="shead rv"><h2>МЕДИА</h2><p>Видео, гайды и нарезки от участников семьи.</p></div>
     <div class="media">
       <article class="shot rv">
-        <div class="bg" style="background-image:url(pepez.jpg),url(assets/city.jpg)"></div>
+        <div class="bg" style="background-image:url(pepez.jpg),url(city.jpg)"></div>
         <h3>PepezHSS</h3>
         <p>Эксклюзивный контент, геймплей и лучшие моменты с сервера.</p>
         <div class="links">
@@ -335,7 +338,7 @@ footer{position:relative;text-align:center}
         </div>
       </article>
       <article class="shot rv">
-        <div class="bg" style="background-image:url(pochemy.jpg),url(assets/vine.jpg)"></div>
+        <div class="bg" style="background-image:url(pochemy.jpg),url(vine.jpg)"></div>
         <h3>Pochemychkina</h3>
         <p>Интересные видео и развлекательный контент от участника семьи.</p>
         <div class="links">
@@ -391,6 +394,21 @@ footer{position:relative;text-align:center}
 </div>
 
 <script>
+  // --- ПРОВЕРКА ПАРОЛЯ ДЛЯ TRIALITY MODS ---
+  function checkModsPassword() {
+    const correctPassword = "lambronoowner"; 
+    const downloadLink = "https://github.com/oleksholo-svg/triality-mods-catalog/releases/download/app/TrialityMods-Setup.exe"; 
+
+    const userPassword = prompt("Введите пароль для скачивания TRIALITY MODS:");
+    if (userPassword === null) return;
+
+    if (userPassword === correctPassword) {
+      window.location.href = downloadLink;
+    } else {
+      alert("Неверный пароль! Попроси его у лидера семьи в Discord.");
+    }
+  }
+
 (function(){
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fmt=n=>n.toLocaleString('ru-RU');
