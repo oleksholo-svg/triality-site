@@ -170,15 +170,17 @@ h1.title span{display:inline-block}
 .cr-links a{display:grid;place-items:center;width:84px;height:44px;border-radius:99px;border:1.5px solid rgba(220,170,255,.7);background:rgba(20,8,34,.5);transition:box-shadow .3s,background .3s,transform .3s var(--ease)}
 .cr-links a:hover{box-shadow:0 0 18px rgba(180,77,255,.7);background:rgba(120,40,190,.35);transform:translateY(-2px)}
 .cr-links svg{width:24px;height:24px;fill:#fff}
+
+/* История - заменено на теги img */
 .hist{position:relative;display:block}
 .track{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;padding:10px 0}
-.ph{position:relative;aspect-ratio:4/3;border-radius:16px;border:0;overflow:hidden;cursor:pointer;transition:transform .5s var(--ease),box-shadow .5s;
-  background:#120818;box-shadow:0 10px 28px rgba(0,0,0,.4)}
-.ph .bg{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;background-position:center;transition:transform 1s var(--ease)}
+.ph{position:relative;aspect-ratio:4/3;border-radius:16px;border:0;overflow:hidden;cursor:pointer;transition:transform .5s var(--ease),box-shadow .5s;background:#120818;box-shadow:0 10px 28px rgba(0,0,0,.4)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
 .ph::after{content:"";position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(transparent,rgba(10,4,18,.8));pointer-events:none}
 .ph span{position:absolute;left:14px;bottom:10px;z-index:1;font-family:var(--f-head);font-size:12px;color:var(--vio2);letter-spacing:.08em;text-shadow:0 1px 6px #000}
 .ph:hover{transform:translateY(-4px);box-shadow:0 18px 40px -12px rgba(180,77,255,.9)}
-.ph:hover .bg{transform:scale(1.06)}
+.ph:hover img{transform:scale(1.06)}
+
 .join{text-align:center;margin-top:70px}
 .join h2{font-family:var(--f-head);font-weight:700;font-size:clamp(26px,4vw,42px);margin:0;animation:title-glow 4s ease-in-out infinite}
 .join > p{color:var(--ink2);margin:10px auto 0;max-width:46ch}
@@ -192,7 +194,7 @@ h1.title span{display:inline-block}
 }
 .cta{display:flex;justify-content:center;align-items:center;gap:26px;flex-wrap:wrap;margin:34px 0 30px}
 
-/* ================= ОБНОВЛЕННАЯ КНОПКА ================= */
+/* Яркая контрастная кнопка */
 .big{
   position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:14px;
   padding:18px 56px;min-height:64px;border-radius:99px;
@@ -209,8 +211,6 @@ h1.title span{display:inline-block}
   z-index:5;cursor:pointer;
   text-shadow:0 2px 5px rgba(0,0,0,0.5);
 }
-/* ======================================================= */
-
 .big::before{
   content:"";position:absolute;inset:2px;border-radius:99px;pointer-events:none;
   background:linear-gradient(180deg,rgba(255,255,255,.2) 0%,transparent 50%);
@@ -237,12 +237,8 @@ h1.title span{display:inline-block}
 .big:hover svg{transform:translateX(10px)}
 
 @keyframes pulse-cta{
-  0%,100%{
-    box-shadow:0 0 0 3px rgba(207, 104, 255, 0.4),0 0 25px rgba(200, 120, 255, 0.8),0 10px 30px rgba(0,0,0,0.6);
-  }
-  50%{
-    box-shadow:0 0 0 5px rgba(207, 104, 255, 0.6),0 0 45px rgba(220, 140, 255, 1),0 10px 30px rgba(0,0,0,0.6);
-  }
+  0%,100%{ box-shadow:0 0 0 3px rgba(207, 104, 255, 0.4),0 0 25px rgba(200, 120, 255, 0.8),0 10px 30px rgba(0,0,0,0.6); }
+  50%{ box-shadow:0 0 0 5px rgba(207, 104, 255, 0.6),0 0 45px rgba(220, 140, 255, 1),0 10px 30px rgba(0,0,0,0.6); }
 }
 
 footer{position:relative;z-index:10;text-align:center;isolation:isolate}
@@ -257,7 +253,7 @@ footer{position:relative;z-index:10;text-align:center;isolation:isolate}
 .ground::after{content:"";position:absolute;inset:auto 0 0;height:18%;background:linear-gradient(transparent,var(--bg))}
 .lb{position:fixed;inset:0;z-index:50;background:rgba(5,2,10,.9);backdrop-filter:blur(8px);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));opacity:0;pointer-events:none;transition:opacity .35s}
 .lb.open{opacity:1;pointer-events:auto}
-.lb img{max-width:min(1100px,100%);max-height:84vh;border-radius:12px;border:1px solid var(--line);box-shadow:0 0 60px rgba(180,77,255,.35);transform:scale(.94);transition:transform .45s var(--ease)}
+.lb img{max-width:min(1100px,100%);max-height:84vh;border-radius:12px;border:1px solid var(--line);box-shadow:0 0 60px rgba(180,77,255,.35);transform:scale(.94);transition:transform .45s var(--ease);object-fit:contain}
 .lb.open img{transform:none}
 .lb .x{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);right:max(16px,calc(env(safe-area-inset-right,0px) + 16px))}
 .lb .p{position:absolute;left:max(16px,calc(env(safe-area-inset-left,0px) + 16px));top:50%;translate:0 -50%}
@@ -330,8 +326,8 @@ footer{position:relative;z-index:10;text-align:center;isolation:isolate}
     <a class="logo" href="#top" aria-label="TRIALITY, наверх">TRIALITY</a>
     <nav aria-label="Разделы"><a href="#about">О нас</a><a href="#downloads">Приложения</a><a href="#media">Медиа</a><a href="#history">История</a></nav>
     <div class="btns">
-      <a class="pill" href="#join">Вступить</a>
-      <a class="pill solid" href="https://discord.gg/triality" target="_blank" rel="noopener">Регистрация</a>
+      <!-- Оставили только кнопку "Вступить", сделав её фиолетовой -->
+      <a class="pill solid" href="#join">Вступить</a>
       <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="mnav"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
     </div>
   </div>
@@ -487,9 +483,12 @@ if('IntersectionObserver' in window&&!reduce){
 }
 const fig=document.getElementById('art').firstElementChild;
 addEventListener('pointermove',e=>{if(reduce||e.pointerType!=='mouse')return;const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;fig.style.translate=`${x*-14}px ${y*-10}px`},{passive:true});
+
+// ИЗМЕНЕНИЕ: Генерация сетки через теги <img> для лучшего качества
 const N=15,photos=Array.from({length:N},(_,i)=>`${i+1}.jpg`);
 const tr=document.getElementById('track');
-tr.innerHTML=photos.map((s,i)=>`<button class="ph" data-i="${i}" aria-label="Открыть фото ${i+1} из ${N}"><div class="bg" style="background-image:url(${s})"></div><span>${String(i+1).padStart(2,'0')} / ${N}</span></button>`).join('');
+tr.innerHTML=photos.map((s,i)=>`<button class="ph" data-i="${i}" aria-label="Открыть фото ${i+1} из ${N}"><img src="${s}" loading="lazy" alt="Фото ${i+1}"><span>${String(i+1).padStart(2,'0')} / ${N}</span></button>`).join('');
+
 const lb=document.getElementById('lb'),li=document.getElementById('lbImg'),lc=document.getElementById('lbC');let li_i=0,lastFocus;
 function show(i){li_i=(i+N)%N;li.src=photos[li_i];li.alt=`Фото ${li_i+1} из истории семьи`;lc.textContent=`${li_i+1} / ${N}`}
 function open(i){lastFocus=document.activeElement;show(i);lb.hidden=false;requestAnimationFrame(()=>lb.classList.add('open'));document.getElementById('lbX').focus()}
@@ -513,7 +512,6 @@ function playVideos() {
 }
 
 playVideos();
-
 document.addEventListener('click', playVideos, { once: true });
 document.addEventListener('scroll', playVideos, { once: true });
 document.addEventListener('touchstart', playVideos, { once: true });
