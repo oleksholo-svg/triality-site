@@ -191,26 +191,29 @@ h1.title span{display:inline-block}
   50%{text-shadow:0 0 36px rgba(200,120,255,.55),0 0 60px rgba(180,77,255,.3)}
 }
 .cta{display:flex;justify-content:center;align-items:center;gap:26px;flex-wrap:wrap;margin:34px 0 30px}
+
+/* ================= ОБНОВЛЕННАЯ КНОПКА ================= */
 .big{
   position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:14px;
-  padding:18px 52px;min-height:62px;border-radius:99px;
-  font-family:var(--f-head);font-weight:700;font-size:clamp(17px,2.5vw,28px);letter-spacing:.06em;
+  padding:18px 56px;min-height:64px;border-radius:99px;
+  font-family:var(--f-head);font-weight:800;font-size:clamp(17px,2.5vw,28px);letter-spacing:.06em;
   color:#ffffff !important;
-  border:2px solid rgba(255,230,255,.95);
-  background:linear-gradient(180deg,#d58bff 0%,#b44dff 40%,#8a2be2 100%);
+  border:2px solid #ffffff;
+  background:linear-gradient(180deg, #cf68ff 0%, #8a2be2 100%);
   box-shadow:
-    0 0 0 1px rgba(255,255,255,.35) inset,
-    0 0 18px rgba(200,120,255,.9),
-    0 0 42px rgba(180,77,255,.65),
-    0 10px 28px rgba(80,20,140,.45);
+    0 0 0 3px rgba(207, 104, 255, 0.4),
+    0 0 30px rgba(200, 120, 255, 0.8),
+    0 10px 30px rgba(0, 0, 0, 0.6);
   animation:pulse-cta 2.6s ease-in-out infinite;
-  transition:transform .28s var(--ease),filter .28s,box-shadow .28s;
+  transition:transform .28s var(--ease), filter .28s, box-shadow .28s;
   z-index:5;cursor:pointer;
-  text-shadow:0 1px 2px rgba(40,0,80,.35);
+  text-shadow:0 2px 5px rgba(0,0,0,0.5);
 }
+/* ======================================================= */
+
 .big::before{
   content:"";position:absolute;inset:2px;border-radius:99px;pointer-events:none;
-  background:linear-gradient(180deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,.06) 38%,transparent 55%);
+  background:linear-gradient(180deg,rgba(255,255,255,.2) 0%,transparent 50%);
 }
 .big::after{
   content:"";position:absolute;inset:0;border-radius:99px;pointer-events:none;
@@ -220,30 +223,34 @@ h1.title span{display:inline-block}
 }
 .big:hover{
   transform:translateY(-3px) scale(1.04);
-  filter:brightness(1.1) saturate(1.1);
+  filter:brightness(1.15) saturate(1.1);
   box-shadow:
-    0 0 0 1px rgba(255,255,255,.45) inset,
-    0 0 26px rgba(220,150,255,1),
-    0 0 56px rgba(190,90,255,.85),
-    0 14px 32px rgba(80,20,140,.5);
+    0 0 0 4px rgba(230, 150, 255, 0.6),
+    0 0 40px rgba(220, 150, 255, 1),
+    0 14px 35px rgba(0, 0, 0, 0.7);
 }
 .big:active{
   transform:translateY(1px) scale(.99);
   filter:brightness(.98);
 }
-.big svg{width:28px;height:16px;stroke:#fff;fill:none;stroke-width:2;transition:transform .35s var(--ease);position:relative;z-index:1;filter:drop-shadow(0 0 4px rgba(255,255,255,.5))}
+.big svg{width:28px;height:16px;stroke:#fff;fill:none;stroke-width:2.5;transition:transform .35s var(--ease);position:relative;z-index:1;filter:drop-shadow(0 0 6px rgba(255,255,255,.8))}
 .big:hover svg{transform:translateX(10px)}
+
 @keyframes pulse-cta{
-  0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.35) inset,0 0 18px rgba(200,120,255,.85),0 0 36px rgba(180,77,255,.55),0 10px 28px rgba(80,20,140,.4)}
-  50%{box-shadow:0 0 0 1px rgba(255,255,255,.5) inset,0 0 28px rgba(230,170,255,1),0 0 60px rgba(200,100,255,.9),0 10px 28px rgba(80,20,140,.5)}
+  0%,100%{
+    box-shadow:0 0 0 3px rgba(207, 104, 255, 0.4),0 0 25px rgba(200, 120, 255, 0.8),0 10px 30px rgba(0,0,0,0.6);
+  }
+  50%{
+    box-shadow:0 0 0 5px rgba(207, 104, 255, 0.6),0 0 45px rgba(220, 140, 255, 1),0 10px 30px rgba(0,0,0,0.6);
+  }
 }
+
 footer{position:relative;z-index:10;text-align:center;isolation:isolate}
 .foot-t{position:relative;z-index:2;font-family:var(--f-head);font-weight:300;font-size:11px;letter-spacing:.6em;color:var(--ink2);padding-left:.6em}
 .foot-l{position:relative;z-index:2;display:flex;justify-content:center;gap:22px;margin:16px 0 8px;font-size:13px}
 .foot-l a{color:var(--ink2);transition:color .3s}.foot-l a:hover{color:var(--vio2)}
 .copy{position:relative;z-index:2;font-size:12px;color:var(--muted);padding-bottom:18px}
 
-/* Исправлен z-index для ground, чтобы видео было видно */
 .ground{position:relative;z-index:0;height:clamp(240px,40vw,560px);margin-top:clamp(-260px,-20vw,-120px);overflow:hidden;pointer-events:none;
   -webkit-mask:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 14%,#000 34%);mask:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 14%,#000 34%)}
 .ground video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 72%;display:block;pointer-events:none}
@@ -334,7 +341,6 @@ footer{position:relative;z-index:10;text-align:center;isolation:isolate}
   <section class="hero">
     <div class="stage" id="stage">
       <div class="art" id="art" aria-hidden="true">
-        <!-- preload="auto" для быстрой загрузки -->
         <video class="vid" id="heroVid" autoplay muted loop playsinline preload="auto" poster="hero-full.jpg">
           <source src="hero-loop.mp4" type="video/mp4">
         </video>
@@ -363,7 +369,7 @@ footer{position:relative;z-index:10;text-align:center;isolation:isolate}
   <div class="ticker" aria-label="TRIALITY, GTA 5 RP, сервер Blaine, набор открыт"><div aria-hidden="true" id="tick"></div></div>
   <section class="wrap facts">
     <article class="fact rv"><h3>АКТИВНОСТЬ</h3><p>Ежедневные сборы, CAPTURE, BIZAWAR, VZP, RP-мероприятия. У нас всегда есть чем заняться — скучать не придётся.</p></article>
-    <article class="fact rv"><h3>ДИСЦИПЛИНА</h3><p>Чёткая структура и ранги. При этом дружелюбная и комфортная атмосфера внутри коллектива.</p></article>
+  <article class="fact rv"><h3>ДИСЦИПЛИНА</h3><p>Чёткая структура и ранги. При этом дружелюбная и комфортная атмосфера внутри коллектива.</p></article>
     <span class="status rv"><i></i>Семья активна на сервере Blaine (GTA 5 RP)</span>
   </section>
   <section class="wrap" id="downloads">
@@ -446,7 +452,6 @@ footer{position:relative;z-index:10;text-align:center;isolation:isolate}
     <a href="https://t.me/trialitymods" target="_blank" rel="noopener">Telegram</a>
   </div>
   <div class="copy">Семья Triality на GTA 5 RP · © 2026</div>
-  <!-- preload="auto" для быстрой загрузки -->
   <div class="ground" aria-hidden="true">
     <video id="groundVid" autoplay muted loop playsinline preload="auto" poster="ground-poster.jpg">
       <source src="ground-loop.mp4" type="video/mp4">
@@ -495,7 +500,6 @@ document.getElementById('lbP').onclick=()=>show(li_i-1);document.getElementById(
 lb.addEventListener('click',e=>{if(e.target===lb)close()});
 addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(li_i-1);if(e.key==='ArrowRight')show(li_i+1)});
 
-// ИСПРАВЛЕНИЕ: Принудительное воспроизведение видео
 const gv = document.getElementById('groundVid');
 const hv = document.getElementById('heroVid');
 
@@ -508,10 +512,8 @@ function playVideos() {
     }
 }
 
-// Запускаем сразу
 playVideos();
 
-// Запасной вариант: если браузер заблокировал автоплей, запускаем при первом клике/скролле
 document.addEventListener('click', playVideos, { once: true });
 document.addEventListener('scroll', playVideos, { once: true });
 document.addEventListener('touchstart', playVideos, { once: true });
