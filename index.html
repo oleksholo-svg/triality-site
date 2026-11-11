@@ -35,6 +35,7 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 :focus-visible{outline:2px solid var(--vio2);outline-offset:3px}
 section{scroll-margin-top:80px}
+
 #stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .fogfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .fogfx i{position:absolute;display:block;border-radius:50%;will-change:transform;mix-blend-mode:screen}
@@ -71,7 +72,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   -webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .art{position:absolute;top:0;bottom:0;left:50%;translate:-50% 0;height:100%;aspect-ratio:1714/916;
   -webkit-mask:linear-gradient(to bottom,transparent 0,#000 6%,#000 58%,transparent 99%);mask:linear-gradient(to bottom,transparent 0,#000 6%,#000 58%,transparent 99%)}
-.art .vid{position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;display:block;will-change:transform}
+.art .vid{position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;display:block;will-change:transform;pointer-events:none}
 .frame{position:absolute;left:7%;right:7%;top:8.6%;height:61%}
 .frame .title{position:absolute;left:0;right:0;top:18%;margin:0}
 .frame .sub{position:absolute;left:0;right:0;top:48%;margin:0}
@@ -236,12 +237,14 @@ h1.title span{display:inline-block}
   0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.35) inset,0 0 18px rgba(200,120,255,.85),0 0 36px rgba(180,77,255,.55),0 10px 28px rgba(80,20,140,.4)}
   50%{box-shadow:0 0 0 1px rgba(255,255,255,.5) inset,0 0 28px rgba(230,170,255,1),0 0 60px rgba(200,100,255,.9),0 10px 28px rgba(80,20,140,.5)}
 }
-footer{position:relative;z-index:1;text-align:center;isolation:isolate}
-.foot-t{font-family:var(--f-head);font-weight:300;font-size:11px;letter-spacing:.6em;color:var(--ink2);padding-left:.6em}
-.foot-l{display:flex;justify-content:center;gap:22px;margin:16px 0 8px;font-size:13px}
+footer{position:relative;z-index:10;text-align:center;isolation:isolate}
+.foot-t{position:relative;z-index:2;font-family:var(--f-head);font-weight:300;font-size:11px;letter-spacing:.6em;color:var(--ink2);padding-left:.6em}
+.foot-l{position:relative;z-index:2;display:flex;justify-content:center;gap:22px;margin:16px 0 8px;font-size:13px}
 .foot-l a{color:var(--ink2);transition:color .3s}.foot-l a:hover{color:var(--vio2)}
-.copy{font-size:12px;color:var(--muted);padding-bottom:18px}
-.ground{position:relative;z-index:-1;height:clamp(240px,40vw,560px);margin-top:clamp(-260px,-20vw,-120px);overflow:hidden;pointer-events:none;
+.copy{position:relative;z-index:2;font-size:12px;color:var(--muted);padding-bottom:18px}
+
+/* Исправлен z-index для ground, чтобы видео было видно */
+.ground{position:relative;z-index:0;height:clamp(240px,40vw,560px);margin-top:clamp(-260px,-20vw,-120px);overflow:hidden;pointer-events:none;
   -webkit-mask:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 14%,#000 34%);mask:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 14%,#000 34%)}
 .ground video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 72%;display:block;pointer-events:none}
 .ground::after{content:"";position:absolute;inset:auto 0 0;height:18%;background:linear-gradient(transparent,var(--bg))}
@@ -330,7 +333,12 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
 <main id="top">
   <section class="hero">
     <div class="stage" id="stage">
-      <div class="art" id="art" aria-hidden="true"><video class="vid" id="heroVid" autoplay muted loop playsinline preload="auto" poster="hero-full.jpg"><source src="hero-loop.mp4" type="video/mp4"></video></div>
+      <div class="art" id="art" aria-hidden="true">
+        <!-- preload="auto" для быстрой загрузки -->
+        <video class="vid" id="heroVid" autoplay muted loop playsinline preload="auto" poster="hero-full.jpg">
+          <source src="hero-loop.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="frame">
         <i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br brr"></i>
         <h1 class="title" id="title" aria-label="TRIALITY">TRIALITY</h1>
@@ -438,7 +446,12 @@ footer{position:relative;z-index:1;text-align:center;isolation:isolate}
     <a href="https://t.me/trialitymods" target="_blank" rel="noopener">Telegram</a>
   </div>
   <div class="copy">Семья Triality на GTA 5 RP · © 2026</div>
-  <div class="ground" aria-hidden="true"><video id="groundVid" autoplay muted loop playsinline preload="metadata" poster="ground-poster.jpg"><source src="ground-loop.mp4" type="video/mp4"></video></div>
+  <!-- preload="auto" для быстрой загрузки -->
+  <div class="ground" aria-hidden="true">
+    <video id="groundVid" autoplay muted loop playsinline preload="auto" poster="ground-poster.jpg">
+      <source src="ground-loop.mp4" type="video/mp4">
+    </video>
+  </div>
 </footer>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Фото из истории" hidden>
   <img id="lbImg" alt="">
@@ -481,10 +494,28 @@ document.getElementById('lbX').onclick=close;
 document.getElementById('lbP').onclick=()=>show(li_i-1);document.getElementById('lbN').onclick=()=>show(li_i+1);
 lb.addEventListener('click',e=>{if(e.target===lb)close()});
 addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(li_i-1);if(e.key==='ArrowRight')show(li_i+1)});
-const gv=document.getElementById('groundVid');
-if(reduce){gv.removeAttribute('autoplay');gv.pause()}else{const gp=gv.play();gp&&gp.catch(()=>{})}
-const hv=document.getElementById('heroVid');
-if(reduce){hv.removeAttribute('autoplay');hv.pause()}else{const pl=hv.play();pl&&pl.catch(()=>{})}
+
+// ИСПРАВЛЕНИЕ: Принудительное воспроизведение видео
+const gv = document.getElementById('groundVid');
+const hv = document.getElementById('heroVid');
+
+function playVideos() {
+    if (hv) {
+        hv.play().catch(e => console.log('Hero video play failed:', e));
+    }
+    if (gv) {
+        gv.play().catch(e => console.log('Ground video play failed:', e));
+    }
+}
+
+// Запускаем сразу
+playVideos();
+
+// Запасной вариант: если браузер заблокировал автоплей, запускаем при первом клике/скролле
+document.addEventListener('click', playVideos, { once: true });
+document.addEventListener('scroll', playVideos, { once: true });
+document.addEventListener('touchstart', playVideos, { once: true });
+
 document.querySelectorAll('.promo').forEach(b=>b.addEventListener('click',()=>{
   const code=b.dataset.code,ok=b.querySelector('.ok');
   const done=t=>{ok.textContent=t;b.classList.add('copied');clearTimeout(b._t);b._t=setTimeout(()=>b.classList.remove('copied'),1600)};
