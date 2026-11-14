@@ -1,0 +1,75 @@
+# Публикует сайт и кладёт в него свежий TrialityPerekup.exe из последнего релиза.
+# Сам exe в репозитории сайта не хранится — он подтягивается при каждой публикации.
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 * * * *'   # раз в час проверяет, не вышла ли новая версия
+  workflow_dispatch:        # кнопка "Run workflow" для ручного запуска
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  APP_REPO: oleksholo-svg/TrialityPerekup
+  APP_FILE: TrialityPerekup.exe
+  SITE_URL: https://trialityfamq.com
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Узнать последнюю версию
+        id: ver
+        run: |
+          set -euo pipefail
+          url=$(curl -fsS -o /dev/null -w '%{redirect_url}' "https://github.com/$APP_REPO/releases/latest/download/$APP_FILE")
+          tag=$(printf '%s' "$url" | sed -n 's#.*/releases/download/\([^/]*\)/.*#\1#p')
+          if [ -z "$tag" ]; then echo "Не удалось определить версию релиза"; exit 1; fi
+          live=$(curl -fsSL --max-time 20 "$SITE_URL/perekup-version.txt" 2>/dev/null | tr -d '[:space:]' || true)
+          echo "Последний релиз: $tag, на сайте: ${live:-нет}"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ "$live" = "$tag" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        if: steps.ver.outputs.skip != 'true'
+        uses: actions/checkout@v6
+
+      - name: Скачать exe из релиза
+        if: steps.ver.outputs.skip != 'true'
+        env:
+          TAG: ${{ steps.ver.outputs.tag }}
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 -o "$APP_FILE" "https://github.com/$APP_REPO/releases/download/$TAG/$APP_FILE"
+          size=$(stat -c %s "$APP_FILE")
+          if [ "$size" -lt 1000000 ]; then echo "Файл слишком маленький: $size байт"; exit 1; fi
+          if [ "$(head -c 2 "$APP_FILE")" != "MZ" ]; then echo "Это не exe-файл"; exit 1; fi
+          printf '%s\n' "$TAG" > perekup-version.txt
+          echo "Готово: $APP_FILE $TAG, $size байт"
+
+      - name: Upload artifact
+        if: steps.ver.outputs.skip != 'true'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        if: steps.ver.outputs.skip != 'true'
+        id: deployment
+        uses: actions/deploy-pages@v5
