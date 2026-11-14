@@ -191,6 +191,10 @@ h1.title span{display:inline-block}
   cursor:not-allowed;pointer-events:none;user-select:none;
   opacity:.72;
 }
+.go.live{color:#fff;border-color:#f0cfff;background:linear-gradient(180deg,rgba(155,59,230,.85),rgba(106,31,176,.85));box-shadow:0 0 16px rgba(200,110,255,.55);cursor:pointer;pointer-events:auto;opacity:1;transition:box-shadow .35s,transform .35s var(--ease),filter .35s}
+.go.live:hover{transform:translateY(-2px);filter:brightness(1.15);box-shadow:0 0 28px rgba(210,130,255,.9)}
+.go.live svg{opacity:1;transition:transform .35s var(--ease)}
+.go.live:hover svg{transform:translateX(6px)}
 .go svg{width:clamp(22px,4.6cqi,56px);height:auto;flex:none;stroke:currentColor;fill:none;stroke-width:2;position:relative;z-index:1;opacity:.7}
 .go-soon{position:absolute;top:-10px;right:-6px;font-size:10px;letter-spacing:.08em;padding:3px 8px;border-radius:99px;background:#5b1a9a;color:#f0d2ff;border:1px solid rgba(240,207,255,.5);font-family:var(--f-body);font-weight:600;opacity:1;pointer-events:none}
 
@@ -436,7 +440,7 @@ footer{position:relative;z-index:10;text-align:center;isolation:isolate}
         <div class="in">
           <h3><span class="t1">TRIALITY</span><span class="t2">PEREKUP</span></h3>
           <p>Умный перекуп-бот для выгодной торговли и контроля рынка.</p>
-          <span class="go" aria-disabled="true" title="Скоро">Скачать<svg viewBox="0 0 40 16" aria-hidden="true"><path d="M0 8h37M30 1l7 7-7 7"/></svg><i class="go-soon">скоро</i></span>
+          <a class="go live" href="https://github.com/oleksholo-svg/TrialityPerekup/releases/latest/download/TrialityPerekup.exe" rel="noopener noreferrer" title="Скачать последнюю версию">Скачать<svg viewBox="0 0 40 16" aria-hidden="true"><path d="M0 8h37M30 1l7 7-7 7"/></svg></a>
         </div>
       </article>
     </div>
