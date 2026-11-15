@@ -160,4 +160,36 @@ function draw(now){
 }
 
 requestAnimationFrame(draw);
+
+// ===== 3D-наклон карточек за курсором (фото «Истории» не трогаем) =====
+if(!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
+  // [селектор карточки, макс. угол, [слой внутри, глубина сдвига в px]...]
+  const cfg=[
+    ['.app',7,[['.pic',-8],['.in',6]]],
+    ['.lead-card',6,[['.lead-pic img',-10],['.lead-in',6]]],
+    ['.cr',7,[['.cr-art img',-14],['.cr-in',6]]],
+    ['.fact',9,[]]
+  ];
+  cfg.forEach(([sel,max,layers])=>document.querySelectorAll(sel).forEach(card=>{
+    card.classList.add('tilt');
+    layers.forEach(([ls,d])=>card.querySelectorAll(ls).forEach(el=>{el.classList.add('tilt-layer');el.style.setProperty('--d',d)}));
+    const g=document.createElement('i');g.className='tilt-glare';g.setAttribute('aria-hidden','true');card.appendChild(g);
+    let raf=0,ev=null;
+    const apply=()=>{raf=0;if(!ev)return;
+      const r=card.getBoundingClientRect();
+      const px=Math.min(1,Math.max(0,(ev.clientX-r.left)/r.width)),py=Math.min(1,Math.max(0,(ev.clientY-r.top)/r.height));
+      const mx=px*2-1,my=py*2-1;
+      card.style.setProperty('--ry',(mx*max).toFixed(2)+'deg');
+      card.style.setProperty('--rx',(-my*max).toFixed(2)+'deg');
+      card.style.setProperty('--mx',mx.toFixed(3));
+      card.style.setProperty('--my',my.toFixed(3));
+      card.style.setProperty('--gx',(px*100).toFixed(1)+'%');
+      card.style.setProperty('--gy',(py*100).toFixed(1)+'%');
+    };
+    card.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')card.classList.add('tilting')});
+    card.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;ev=e;if(!raf)raf=requestAnimationFrame(apply)},{passive:true});
+    card.addEventListener('pointerleave',()=>{ev=null;card.classList.remove('tilting');
+      ['--rx','--ry','--mx','--my'].forEach(v=>card.style.setProperty(v,v.includes('r')?'0deg':'0'))});
+  }));
+}
 })();
