@@ -263,11 +263,11 @@ h1.title span{display:inline-block}
 /* История - строгая сетка без скруглений и теней */
 .hist{position:relative;display:block}
 .track{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;padding:10px 0}
-.ph{position:relative;aspect-ratio:4/3;border-radius:0;border:none;overflow:hidden;cursor:pointer;background:#120818;will-change:transform;padding:0}
-.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease);decoding="async"}
+.ph{position:relative;aspect-ratio:16/9;border-radius:0;border:none;overflow:hidden;cursor:pointer;background:#120818;will-change:transform;padding:0}
+.ph img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .5s var(--ease)} /* фото целиком, без обрезки */
 .ph::after{content:"";position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(transparent,rgba(10,4,18,.8));pointer-events:none}
 .ph span{position:absolute;left:14px;bottom:10px;z-index:1;font-family:var(--f-head);font-size:12px;color:var(--vio2);letter-spacing:.08em;text-shadow:0 1px 6px #000}
-.ph:hover img{transform:scale(1.06)}
+.ph:hover img{transform:scale(1.03)}
 
 .join{text-align:center;margin-top:70px}
 .join h2{font-family:var(--f-head);font-weight:700;font-size:clamp(26px,4vw,42px);margin:0;animation:title-glow 4s ease-in-out infinite}
