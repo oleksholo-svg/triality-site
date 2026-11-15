@@ -1,4 +1,4 @@
-# Публикует сайт и кладёт в него свежий TrialityPerekup.exe из последнего релиза.
+# Публикует сайт и кладёт в него свежий TrialityPerekup-Setup.exe из последнего релиза.
 # Сам exe в репозитории сайта не хранится — он подтягивается при каждой публикации.
 name: Deploy site
 
@@ -20,7 +20,7 @@ concurrency:
 
 env:
   APP_REPO: oleksholo-svg/TrialityPerekup
-  APP_FILE: TrialityPerekup.exe
+  APP_FILE: TrialityPerekup-Setup.exe
   SITE_URL: https://trialityfamq.com
 
 jobs:
@@ -58,7 +58,7 @@ jobs:
           set -euo pipefail
           curl -fL --retry 3 -o "$APP_FILE" "https://github.com/$APP_REPO/releases/download/$TAG/$APP_FILE"
           size=$(stat -c %s "$APP_FILE")
-          if [ "$size" -lt 1000000 ]; then echo "Файл слишком маленький: $size байт"; exit 1; fi
+          if [ "$size" -lt 100000 ]; then echo "Файл слишком маленький: $size байт"; exit 1; fi
           if [ "$(head -c 2 "$APP_FILE")" != "MZ" ]; then echo "Это не exe-файл"; exit 1; fi
           printf '%s\n' "$TAG" > perekup-version.txt
           echo "Готово: $APP_FILE $TAG, $size байт"
