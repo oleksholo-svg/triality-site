@@ -3,7 +3,7 @@
 (function(){
   var html=document.documentElement,seen=false,done=false,timer;
   try{seen=sessionStorage.getItem('introSeen')==='1';sessionStorage.setItem('introSeen','1')}catch(e){}
-  var show=!seen&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var show=!seen; // показываем и при «уменьшить движение» в системе — так решил владелец сайта
   if(show)html.classList.add('iv');
 
   function finish(){
