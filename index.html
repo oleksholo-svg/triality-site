@@ -421,9 +421,19 @@ footer{position:relative;z-index:10;text-align:center;isolation:isolate}
   html{scroll-behavior:auto}
   .ticker div { animation: marquee 28s linear infinite !important; }
 }
+/* Интро-видео (логика в intro.js) */
+#iv{display:none;position:fixed;inset:0;z-index:9999;background:#000}
+html.iv #iv,#iv.out{display:block}
+html.iv{overflow:hidden}
+#iv video{display:block;width:100%;height:100%;object-fit:cover}
+@media (orientation:portrait){#iv video{object-fit:contain}} /* иначе на телефоне логотип обрезается; фон видео чёрный — полос не видно */
+#iv .pill{position:absolute;z-index:1;top:max(16px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px))}
+#iv.out{opacity:0;transition:opacity .6s ease;pointer-events:none}
 </style>
+<script src="intro.js"></script>
 </head>
 <body>
+<div id="iv"><video src="intro.mp4" muted playsinline preload="none" aria-hidden="true"></video><button class="pill solid" type="button">Пропустить</button></div>
 <div class="fogfx" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 <canvas id="stars" aria-hidden="true"></canvas>
 <header>
