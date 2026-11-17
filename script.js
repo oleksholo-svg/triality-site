@@ -6,7 +6,9 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fmt=n=>n.toLocaleString('ru-RU');
 const t=document.getElementById('title');
 t.innerHTML=[...t.textContent].map((c,i)=>`<span aria-hidden="true" style="--i:${i}">${c}</span>`).join('');
-document.body.classList.add('intro');
+// анимации появления — после интро-видео (intro.js), если оно ещё идёт
+const startIntro=()=>document.body.classList.add('intro');
+if(document.documentElement.classList.contains('iv'))document.addEventListener('introdone',startIntro,{once:true});else startIntro();
 const tickTxt='<span>TRIALITY<b>•</b>GTA 5 RP<b>•</b>СЕРВЕР BLAINE<b>•</b>НАБОР ОТКРЫТ<b>•</b></span>';
 document.getElementById('tick').innerHTML=tickTxt.repeat(8);
 const bg=document.getElementById('burger'),mn=document.getElementById('mnav');
@@ -192,4 +194,7 @@ if(!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
       ['--rx','--ry','--mx','--my'].forEach(v=>card.style.setProperty(v,v.includes('r')?'0deg':'0'))});
   }));
 }
+
+// Кеш для быстрой повторной загрузки (sw.js)
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 })();
