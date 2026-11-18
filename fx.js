@@ -41,6 +41,31 @@ document.addEventListener('click',e=>{
   },560);
 });
 
+// ===== Дым на фоне всего сайта =====
+// Текстура дыма рисуется один раз в маленький canvas, дальше слои только сдвигаются через transform (дёшево для GPU).
+(window.requestIdleCallback||setTimeout)(()=>{
+  const S=256,c=document.createElement('canvas');c.width=c.height=S;
+  const g=c.getContext('2d'),img=g.createImageData(S,S),d=img.data;
+  // бесшовный value-noise: решётка с периодом p, чтобы текстура стыковалась при повторе
+  const R=new Float32Array(64*64).map(()=>Math.random());
+  const sm=t=>t*t*(3-2*t);
+  const noise=(x,y,p)=>{const xi=Math.floor(x),yi=Math.floor(y),fx=sm(x-xi),fy=sm(y-yi),
+    v=(i,j)=>R[((yi+j)%p)*64+(xi+i)%p];
+    return v(0,0)+(v(1,0)-v(0,0))*fx+(v(0,1)-v(0,0))*fy+(v(0,0)-v(1,0)-v(0,1)+v(1,1))*fx*fy};
+  const fbm=(x,y)=>{let s=0,a=.5,p=2;for(let o=0;o<6;o++){s+=a*noise(x*p,y*p,p);a*=.5;p*=2}return s};
+  for(let y=0;y<S;y++)for(let x=0;x<S;x++){
+    const u=x/S,v=y/S,w=fbm(u+.3*fbm(u,v),v+.3*fbm(v+.5,u+.5)); // искривление даёт «струйки»
+    const k=Math.max(0,w-.42)/.58,i=(y*S+x)*4;
+    d[i]=150+k*90;d[i+1]=60+k*80;d[i+2]=230;d[i+3]=Math.pow(k,1.6)*255;
+  }
+  g.putImageData(img,0,0);
+  const url=c.toDataURL();
+  const box=document.createElement('div');box.className='fx-smoke';box.setAttribute('aria-hidden','true');
+  box.innerHTML='<i></i><i></i>';
+  box.querySelectorAll('i').forEach(i=>i.style.backgroundImage=`url(${url})`);
+  document.body.prepend(box);
+});
+
 if(!mouse)return;
 
 // ===== Курсор =====

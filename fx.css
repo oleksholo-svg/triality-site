@@ -17,6 +17,16 @@ html.fx-down .fx-ring{width:28px;height:28px;margin:-14px 0 0 -14px}
 html.fx-view .fx-ring{width:84px;height:84px;margin:-42px 0 0 -42px;background:rgba(120,40,200,.45);border-color:#f0cfff;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 html.fx-view .fx-ring::after{opacity:1}
 
+/* ===== Дым на фоне всего сайта (текстура рисуется в fx.js) ===== */
+.fx-smoke{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:0;animation:fxSmokeIn 3s 1s ease forwards}
+.fx-smoke i{position:absolute;top:-10%;left:0;width:200%;height:120%;background-repeat:repeat;will-change:transform;filter:blur(2px)}
+.fx-smoke i:nth-child(1){background-size:900px 900px;opacity:.55;animation:fxSmokeA 90s linear infinite}
+.fx-smoke i:nth-child(2){background-size:1400px 1400px;opacity:.4;animation:fxSmokeB 130s linear infinite;background-position:400px 300px}
+@keyframes fxSmokeIn{to{opacity:1}}
+/* сдвиг ровно на размер плитки: цикл без скачка */
+@keyframes fxSmokeA{from{transform:translate3d(0,0,0)}to{transform:translate3d(-900px,0,0)}}
+@keyframes fxSmokeB{from{transform:translate3d(-1400px,0,0)}to{transform:translate3d(0,0,0)}}
+
 /* искры за курсором */
 #fxTrail{position:fixed;inset:0;width:100%;height:100%;z-index:10000;pointer-events:none}
 
