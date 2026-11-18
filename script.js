@@ -2,7 +2,7 @@
 if(window.top!==window.self){try{window.top.location=window.self.location}catch(e){document.documentElement.style.display='none'}}
 
 (function(){
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reduce=false; // анимации у всех, даже при «уменьшить движение» в системе: так решил владелец сайта
 const fmt=n=>n.toLocaleString('ru-RU');
 const t=document.getElementById('title');
 t.innerHTML=[...t.textContent].map((c,i)=>`<span aria-hidden="true" style="--i:${i}">${c}</span>`).join('');

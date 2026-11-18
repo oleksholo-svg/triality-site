@@ -1,8 +1,7 @@
 // Эффекты поверх сайта: курсор с искрами, магнитные кнопки, буквы заголовков, шторка при переходе по меню.
 // Отдельно от script.js: если тут что-то сломается, остальной сайт работает как раньше.
-// При «уменьшить движение» в системе ничего не включается.
+// Включены у всех, даже при «уменьшить движение» в системе: так решил владелец сайта.
 (function(){
-if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
 const html=document.documentElement;
 const mouse=matchMedia('(hover:hover) and (pointer:fine)').matches;
 

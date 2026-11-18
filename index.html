@@ -452,12 +452,6 @@ footer{position:relative;z-index:10;text-align:center;isolation:isolate}
 /* узкий экран: карточка приложения растёт по содержимому, а не режет текст сверху и снизу */
 @media (max-width:520px){.app{aspect-ratio:auto;min-height:58vw}.app .in{padding-block:22px}}
 @media (max-width:420px){.logo{font-size:14px}.pill.solid{padding:7px 12px;font-size:12px}}
-@media (prefers-reduced-motion:reduce){
-  .fogfx i, .intro .nav, .intro h1.title span, .intro .sub, .intro .frame>.br, .intro .side span, .intro .art, .intro .about, .intro .stats, .rv.pre, .lead-badge i, .cr::after, .promo .ok, .ph:hover, .big, .join h2 {animation:none!important;transition:none!important}
-  .rv.pre{opacity:1;transform:none}
-  html{scroll-behavior:auto}
-  .ticker div { animation: marquee 28s linear infinite !important; }
-}
 /* Интро-видео (логика в intro.js) */
 #iv{display:none;position:fixed;inset:0;z-index:9999;background:#000}
 html.iv #iv,#iv.out{display:block}

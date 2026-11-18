@@ -48,6 +48,3 @@ html.fx-view .fx-ring::after{opacity:1}
 .fx-mag{transition-property:transform,box-shadow,border-color,background,filter,translate!important;transition-duration:.35s!important}
 .fx-mag.fx-pull{transition-duration:.35s,.35s,.35s,.35s,.35s,.08s!important}
 
-@media (prefers-reduced-motion:reduce){
-  .fx-split .fx-ch{opacity:1;transform:none;filter:none;transition:none}
-}
