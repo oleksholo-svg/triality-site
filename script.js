@@ -23,25 +23,6 @@ if('IntersectionObserver' in window&&!reduce){
   document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight)el.classList.add('pre');io.observe(el)});
 }
 
-const fig=document.getElementById('art').firstElementChild;
-let wWidth = window.innerWidth;
-let wHeight = window.innerHeight;
-window.addEventListener('resize', () => {
-    wWidth = window.innerWidth;
-    wHeight = window.innerHeight;
-}, { passive: true });
-
-let pmTicking = false;
-addEventListener('pointermove', e => {
-    if (reduce || e.pointerType !== 'mouse' || pmTicking) return;
-    pmTicking = true;
-    requestAnimationFrame(() => {
-        const x = e.clientX / wWidth - .5, y = e.clientY / wHeight - .5;
-        fig.style.translate = `${x * -14}px ${y * -10}px`;
-        pmTicking = false;
-    });
-}, { passive: true });
-
 const N=15,photos=Array.from({length:N},(_,i)=>`${i+1}.jpg`);
 const tr=document.getElementById('track');
 tr.innerHTML=photos.map((s,i)=>`<button class="ph" data-i="${i}" aria-label="Открыть фото ${i+1} из ${N}"><img src="${s}" loading="lazy" decoding="async" alt="Фото ${i+1}"><span>${String(i+1).padStart(2,'0')} / ${N}</span></button>`).join('');
