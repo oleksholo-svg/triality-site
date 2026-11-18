@@ -7,7 +7,7 @@
 //  - удалил с сайта много файлов и хочешь очистить кеш у посетителей.
 // Если менял только index.html (тексты, разметку) — версию менять НЕ нужно: страница всегда берётся из сети.
 // Видео (*.mp4), exe и perekup-version.txt сюда не попадают вообще.
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const CACHE = 'triality-' + CACHE_VERSION;
 
 self.addEventListener('install', () => self.skipWaiting());
