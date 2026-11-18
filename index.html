@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <!-- Безопасность -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://triality.goatcounter.com/count; media-src 'self'; manifest-src 'self'; connect-src 'self' https://triality.goatcounter.com/count; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://triality.goatcounter.com/count; media-src 'self'; manifest-src 'self'; connect-src 'self' https://triality.goatcounter.com/count https://triality.goatcounter.com/counter/; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
@@ -201,6 +201,15 @@ h1.title span{display:inline-block}
 .go.live svg{opacity:1;transition:transform .35s var(--ease)}
 .go.live:hover svg{transform:translateX(6px)}
 .go svg{width:clamp(22px,4.6cqi,56px);height:auto;flex:none;stroke:currentColor;fill:none;stroke-width:2;position:relative;z-index:1;opacity:.7}
+/* Счётчик скачиваний Перекупа (число берётся из GoatCounter в script.js; пока не загрузилось — скрыт) */
+.dl-count{position:absolute;right:4cqi;bottom:4cqi;z-index:25;display:flex;align-items:center;gap:clamp(6px,1.4cqi,10px);
+  padding:clamp(5px,1.2cqi,10px) clamp(10px,2.4cqi,18px);border-radius:99px;border:1px solid rgba(220,170,255,.45);
+  background:rgba(14,6,26,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 0 14px rgba(180,77,255,.35);
+  font-family:"Montserrat",var(--f-body);font-weight:500;font-size:clamp(11px,2.3cqi,20px);line-height:1.2;color:#e6dcf5;white-space:nowrap;
+  opacity:0;transform:translateY(4px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.dl-count.on{opacity:1;transform:none}
+.dl-count svg{width:clamp(13px,2.6cqi,22px);height:auto;flex:none;stroke:var(--vio2);fill:none;stroke-width:2.2}
+.dl-count b{font-family:var(--f-head);font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
 .go-soon{position:absolute;top:-10px;right:-6px;font-size:10px;letter-spacing:.08em;padding:3px 8px;border-radius:99px;background:#5b1a9a;color:#f0d2ff;border:1px solid rgba(240,207,255,.5);font-family:var(--f-body);font-weight:600;opacity:1;pointer-events:none}
 
 /* ===== Лидерка ===== */
@@ -513,6 +522,7 @@ html.iv{overflow:hidden}
           <p>Умный перекуп-бот для выгодной торговли и контроля рынка.</p>
           <a class="go live" href="TrialityPerekup-Setup.exe" download title="Скачать последнюю версию" data-goatcounter-click="download-perekup" data-goatcounter-title="Скачать Triality Perekup">Скачать<svg viewBox="0 0 40 16" aria-hidden="true"><path d="M0 8h37M30 1l7 7-7 7"/></svg></a>
         </div>
+        <div class="dl-count" id="dlCount" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg><span><b>0</b> <span class="w">скачиваний</span></span></div>
       </article>
     </div>
   </section>
