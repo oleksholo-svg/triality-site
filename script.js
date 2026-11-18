@@ -195,6 +195,27 @@ if(!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
   }));
 }
 
+// Счётчик скачиваний Перекупа: сколько раз нажали «Скачать» (событие download-perekup в GoatCounter).
+// Если число не пришло (выключено в настройках GoatCounter, блокировщик рекламы, нет сети) — блок просто не показывается.
+(function(){
+  const box=document.getElementById('dlCount');
+  if(!box||!window.fetch)return;
+  const word=n=>{const a=n%10,b=n%100;return a===1&&b!==11?'скачивание':a>=2&&a<=4&&(b<12||b>14)?'скачивания':'скачиваний'};
+  const base='https://triality.goatcounter.com/counter/';
+  const paths=['download-perekup','%2Fdownload-perekup']; // путь события: без «/» (основной) и с «/» (на всякий случай)
+  const tryPath=i=>i>=paths.length?Promise.reject():fetch(base+paths[i]+'.json',{cache:'no-store',credentials:'omit'})
+    .then(r=>r.ok?r.json():tryPath(i+1));
+  tryPath(0).then(d=>{
+    const n=parseInt(String(d&&d.count).replace(/\D/g,''),10);
+    if(!(n>0))return;
+    box.querySelector('b').textContent=fmt(n);
+    box.querySelector('.w').textContent=word(n);
+    box.setAttribute('aria-label',fmt(n)+' '+word(n));
+    box.hidden=false;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>box.classList.add('on')));
+  }).catch(()=>{});
+})();
+
 // Кеш для быстрой повторной загрузки (sw.js)
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 })();
