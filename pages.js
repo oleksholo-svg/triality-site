@@ -1,6 +1,6 @@
 // Скрипт отдельных страниц (perekup/, join/). На главной работает script.js.
 (function(){
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reduce=false; // анимации у всех, даже при «уменьшить движение» в системе — как на главной (так решил владелец сайта)
 const fmt=n=>n.toLocaleString('ru-RU');
 
 // Мобильное меню
