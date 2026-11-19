@@ -177,11 +177,7 @@ footer>*:not(.ground){position:relative;z-index:2}
   .big{padding:15px 28px}
 }
 @media (max-width:420px){.logo{font-size:14px}.pill.solid{padding:7px 12px;font-size:12px}.grid{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){
-  .fogfx i,.phero h1 em{animation:none!important}
-  .rv.pre{opacity:1;transform:none}
-  html{scroll-behavior:auto}
-}
+
 
 /* ===== 3D-наклон карточек за курсором — как на главной (включает pages.js, только для мыши) ===== */
 .tilt{position:relative}
