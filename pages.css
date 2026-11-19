@@ -26,6 +26,20 @@ main,header,footer{position:relative;z-index:1}
 .fogfx i:nth-child(1){width:90vmax;height:55vmax;left:-30vmax;top:-10vmax;background:radial-gradient(closest-side,rgba(140,50,220,.6),transparent);animation:fogA 46s ease-in-out infinite alternate}
 .fogfx i:nth-child(2){width:80vmax;height:50vmax;right:-35vmax;top:20vh;background:radial-gradient(closest-side,rgba(170,70,240,.5),transparent);animation:fogB 58s ease-in-out infinite alternate}
 .fogfx i:nth-child(3){width:110vmax;height:45vmax;left:-20vmax;bottom:-22vmax;background:radial-gradient(closest-side,rgba(120,40,200,.6),transparent);animation:fogC 64s ease-in-out infinite alternate}
+.fogfx i:nth-child(4){width:60vmax;height:38vmax;left:30vw;top:35vh;background:radial-gradient(closest-side,rgba(200,110,255,.3),transparent);animation:fogD 38s ease-in-out infinite alternate}
+.fogfx i:nth-child(5){width:140vmax;height:30vmax;left:-20vmax;top:45vh;border-radius:40%;background:radial-gradient(50% 50% at 30% 50%,rgba(150,60,230,.4),transparent 70%),radial-gradient(40% 50% at 75% 45%,rgba(120,40,210,.4),transparent 70%);animation:fogE 30s linear infinite alternate}
+@keyframes fogD{to{transform:translate(-26vw,22vh) scale(1.3)}}
+@keyframes fogE{to{transform:translateX(-30vmax) translateY(-6vh)}}
+#stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+
+/* Интро-видео (логика в intro.js, как на главной) */
+#iv{display:none;position:fixed;inset:0;z-index:9999;background:#000}
+html.iv #iv,#iv.out{display:block}
+html.iv{overflow:hidden}
+#iv video{display:block;width:100%;height:100%;object-fit:cover}
+@media (orientation:portrait){#iv video{object-fit:contain}}
+#iv .pill{position:absolute;z-index:1;top:max(16px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px))}
+#iv.out{opacity:0;transition:opacity .6s ease;pointer-events:none}
 @keyframes fogA{to{transform:translate(28vw,18vh) scale(1.15)}}
 @keyframes fogB{to{transform:translate(-30vw,-14vh) scale(1.2)}}
 @keyframes fogC{to{transform:translate(22vw,-10vh) scale(.9)}}
@@ -135,11 +149,16 @@ header{position:sticky;top:0;z-index:20;background:rgba(7,4,12,.95);border-botto
 .more svg{width:26px;height:16px;flex:none;stroke:var(--vio2);fill:none;stroke-width:2.2}
 
 /* Подвал */
-footer{text-align:center;padding:40px 0 22px;border-top:1px solid rgba(180,77,255,.15);margin-top:70px;background:rgba(7,4,12,.6)}
+footer{text-align:center;padding-top:40px;margin-top:40px;isolation:isolate}
+footer>*:not(.ground){position:relative;z-index:2}
+.ground{position:relative;z-index:0;height:clamp(240px,40vw,560px);margin-top:clamp(-260px,-20vw,-120px);overflow:hidden;pointer-events:none;
+  -webkit-mask:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 14%,#000 34%);mask:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 14%,#000 34%)}
+.ground video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 72%;display:block;pointer-events:none}
+.ground::after{content:"";position:absolute;inset:auto 0 0;height:18%;background:linear-gradient(transparent,var(--bg))}
 .foot-t{font-family:var(--f-head);font-weight:300;font-size:11px;letter-spacing:.6em;color:var(--ink2);padding-left:.6em}
 .foot-l{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 22px;margin:16px 0 8px;font-size:13px}
 .foot-l a{color:var(--ink2);transition:color .3s}.foot-l a:hover{color:var(--vio2)}
-.copy{font-size:12px;color:var(--muted)}
+.copy{font-size:12px;color:var(--muted);padding-bottom:18px}
 
 /* Появление при прокрутке (включает pages.js) */
 .rv{transition:opacity .9s var(--ease),transform .9s var(--ease)}
