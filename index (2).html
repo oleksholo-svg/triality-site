@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<!-- Безопасность -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://triality.goatcounter.com/count; media-src 'self'; manifest-src 'self'; connect-src 'self' https://triality.goatcounter.com/count https://triality.goatcounter.com/counter/; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
+<title>Triality — семья на GTA 5 RP Blaine | Набор открыт</title>
+<meta name="description" content="TRIALITY — семья на GTA 5 RP, сервер Blaine. Набор открыт: капты, бизвары, ВЗП, RP-мероприятия. Лидерка Армянской мафии и бесплатная программа Triality Перекуп.">
+<link rel="canonical" href="https://trialityfamq.com/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#07040c">
+
+<!-- Превью ссылки в Discord, Telegram, VK и поиске -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Triality">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://trialityfamq.com/">
+<meta property="og:title" content="Triality — семья на GTA 5 RP Blaine">
+<meta property="og:description" content="Набор открыт. Капты, бизвары, ВЗП, лидерка Армянской мафии и своя программа Triality Перекуп.">
+<meta property="og:image" content="https://trialityfamq.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Логотип семьи Triality">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Triality — семья на GTA 5 RP Blaine">
+<meta name="twitter:description" content="Набор открыт. Капты, бизвары, ВЗП, лидерка Армянской мафии и своя программа Triality Перекуп.">
+<meta name="twitter:image" content="https://trialityfamq.com/og-image.jpg">
+
+<!-- Данные о семье для Google и Яндекса (это не скрипт, браузер его не выполняет) -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Triality","alternateName":"Семья Triality GTA 5 RP","url":"https://trialityfamq.com/","logo":"https://trialityfamq.com/android-chrome-512x512.png","description":"TRIALITY — семья на GTA 5 RP, сервер Blaine. Набор открыт: капты, бизвары, ВЗП, RP-мероприятия. Лидерка Армянской мафии и бесплатная программа Triality Перекуп.","sameAs":["https://discord.gg/Wehhq7qqGY","https://www.youtube.com/@PepezHSS","https://www.youtube.com/@pochemychkina","https://t.me/trialitymods","https://t.me/pepez5rp","https://t.me/pochemychkinaa"]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:ital,wght@0,500;1,800&family=Unbounded:wght@300;400;500;700;800&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#07040c; --ink:#f3ecff; --ink2:#bfb0d6; --muted:#8a7aa3;
+  --vio:#b44dff; --vio2:#d58bff; --line:rgba(190,120,255,.35);
+  --card:linear-gradient(120deg,rgba(40,16,62,.9),rgba(14,7,24,.95));
+  --f-logo:"Michroma","Unbounded",system-ui,sans-serif;
+  --f-head:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+img{max-width:100%}[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;overflow-x:hidden;overflow-x:clip}
+html{overflow-x:hidden;overflow-x:clip}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+:focus-visible{outline:2px solid var(--vio2);outline-offset:3px}
+section{scroll-margin-top:80px}
+
+#stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.fogfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.fogfx i{position:absolute;display:block;border-radius:50%;will-change:transform;transform:translateZ(0);backface-visibility:hidden;opacity:0.4}
+.fogfx i:nth-child(1){width:90vmax;height:55vmax;left:-30vmax;top:-10vmax;background:radial-gradient(closest-side,rgba(140,50,220,.6),transparent);animation:fogA 46s ease-in-out infinite alternate}
+.fogfx i:nth-child(2){width:80vmax;height:50vmax;right:-35vmax;top:20vh;background:radial-gradient(closest-side,rgba(170,70,240,.5),transparent);animation:fogB 58s ease-in-out infinite alternate}
+.fogfx i:nth-child(3){width:110vmax;height:45vmax;left:-20vmax;bottom:-22vmax;background:radial-gradient(closest-side,rgba(120,40,200,.6),transparent);animation:fogC 64s ease-in-out infinite alternate}
+.fogfx i:nth-child(4){width:60vmax;height:38vmax;left:30vw;top:35vh;background:radial-gradient(closest-side,rgba(200,110,255,.3),transparent);animation:fogD 38s ease-in-out infinite alternate}
+.fogfx i:nth-child(5){width:140vmax;height:30vmax;left:-20vmax;top:45vh;border-radius:40%;background:radial-gradient(50% 50% at 30% 50%,rgba(150,60,230,.4),transparent 70%),radial-gradient(40% 50% at 75% 45%,rgba(120,40,210,.4),transparent 70%);animation:fogE 30s linear infinite alternate}
+@keyframes fogA{to{transform:translate(28vw,18vh) scale(1.15)}}
+@keyframes fogB{to{transform:translate(-30vw,-14vh) scale(1.2)}}
+@keyframes fogC{to{transform:translate(22vw,-10vh) scale(.9)}}
+@keyframes fogD{to{transform:translate(-26vw,22vh) scale(1.3)}}
+@keyframes fogE{to{transform:translateX(-30vmax) translateY(-6vh)}}
+main,header,footer{position:relative;z-index:1}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(7,4,12,0.95);border-bottom:1px solid rgba(180,77,255,.12)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.nav{display:flex;align-items:center;gap:28px;padding-block:14px}
+.logo{font-family:var(--f-logo);letter-spacing:.18em;font-size:17px;transition:text-shadow .4s,color .3s}
+.logo:hover{color:#fff;text-shadow:0 0 18px rgba(200,120,255,.9),0 0 36px rgba(180,77,255,.5)}
+.nav nav{display:flex;gap:26px;padding-left:28px;border-left:1px solid rgba(255,255,255,.15);font-size:13px}
+.nav nav a{position:relative;color:var(--ink2);transition:color .3s}
+.nav nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--vio2);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease);box-shadow:0 0 8px var(--vio)}
+.nav nav a:hover{color:var(--ink)}
+.nav nav a:hover::after{transform:scaleX(1)}
+.nav .btns{margin-left:auto;display:flex;gap:10px;align-items:center}
+.pill{display:inline-block;border-radius:99px;padding:8px 20px;font-size:13px;border:1px solid rgba(255,255,255,.35);transition:box-shadow .35s,border-color .35s,transform .35s var(--ease),background .35s}
+.pill:hover{border-color:var(--vio2);box-shadow:0 0 18px rgba(180,77,255,.55);transform:translateY(-1px)}
+.pill.solid{background:linear-gradient(180deg,#9b3be6,#6a1fb0);border-color:#c27aff;box-shadow:0 0 14px rgba(180,77,255,.45)}
+.burger{display:none;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.3);place-items:center}
+.burger svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.6;fill:none}
+.mnav{display:none}
+
+/* ================= ИСПРАВЛЕННЫЙ ФОН (HERO) ================= */
+.hero{position:relative;text-align:center;padding-bottom:70px;
+  /* Чёрный фон плавно растворяется внизу, без резкой границы */
+  background:linear-gradient(to bottom,#000 0,#000 calc(100% - 330px),rgba(0,0,0,.75) calc(100% - 170px),rgba(0,0,0,.3) calc(100% - 70px),rgba(0,0,0,0) 100%);}
+.stage{
+  position:relative;
+  width:100%;
+  /* Высота экрана минус место под блок «Больше, чем семья» и цифры — всё видно сразу */
+  height: calc(100vh - 240px);
+  height: calc(100svh - 240px);
+  min-height: 440px;
+  overflow:hidden;
+  background: transparent;
+}
+.art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* Убираем жесткие обрезки, делаем мягкое затухание снизу и по бокам */
+  -webkit-mask: linear-gradient(to bottom, #000 70%, transparent 100%);
+  mask: linear-gradient(to bottom, #000 70%, transparent 100%);
+}
+.art .vid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover; /* Заполняет весь блок, сохраняя пропорции */
+  display: block;
+  pointer-events: none;
+}
+/* ========================================================= */
+
+.frame{
+  position:absolute;
+  left:5%;
+  right:5%;
+  top:15%;
+  height:70%;
+  z-index: 10;
+}
+.frame .title{position:absolute;left:0;right:0;top:10%;margin:0}
+.frame .sub{position:absolute;left:0;right:0;top:40%;margin:0}
+.br{position:absolute;width:16px;height:16px;border-color:rgba(255,255,255,.7);border-style:solid;border-width:0}
+.br.tl{left:0;top:0;border-top-width:1.5px;border-left-width:1.5px}
+.br.tr{right:0;top:0;border-top-width:1.5px;border-right-width:1.5px}
+.br.bl{left:0;bottom:0;border-bottom-width:1.5px;border-left-width:1.5px}
+.br.brr{right:0;bottom:0;border-bottom-width:1.5px;border-right-width:1.5px}
+h1.title{font-family:var(--f-logo);font-weight:400;font-size:min(10vw,120px,calc(17vh - 40px));letter-spacing:.16em;line-height:1;text-shadow:0 0 30px rgba(200,140,255,.45),0 2px 18px rgba(0,0,0,.6);padding-left:.16em}
+h1.title span{display:inline-block}
+.sub{font-family:var(--f-head);font-weight:300;font-size:min(2vw,24px);letter-spacing:.5em;color:#e9defa;padding-left:.5em;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.side{position:absolute;top:54%;font-family:var(--f-head);font-weight:300;font-size:min(1.3vw,16px);line-height:1.75;letter-spacing:.14em;color:#e9defa;text-align:left;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.side.l{left:2%}.side.r{right:2%;text-align:right}
+.side span{display:block}
+
+.ticker{overflow:hidden;border-block:1px solid rgba(180,77,255,.25);background:rgba(25,10,40,.5);margin:0;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);position:relative;z-index:10;}
+.ticker div{display:flex;width:max-content;animation:marquee 28s linear infinite;will-change:transform;transform:translateZ(0);}
+.ticker span{font-family:var(--f-logo);font-size:12px;letter-spacing:.3em;color:var(--ink2);padding:12px 0;white-space:nowrap}
+.ticker b{color:var(--vio2);font-weight:400;padding:0 18px}
+@keyframes marquee{from{transform:translate3d(-50%, 0, 0)}to{transform:translate3d(0%, 0, 0)}}
+.about{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(20px,4vw,48px);align-items:center;margin-top:clamp(-100px,-8vw,-20px)}
+.about h2{font-family:var(--f-head);font-weight:700;font-size:clamp(30px,5.2vw,60px);line-height:1.02;margin:0;text-align:right;letter-spacing:-.01em;text-shadow:0 4px 30px rgba(0,0,0,.7)}
+.about h2 em{font-style:normal;background:linear-gradient(90deg,#c46bff,#e7b3ff,#a43cf0,#c46bff);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:hue 6s linear infinite}
+.vline{width:1px;height:110px;background:linear-gradient(transparent,rgba(255,255,255,.6),transparent)}
+.about .lead{margin:0;text-align:left;color:#e2d6f4;font-size:clamp(13px,1.35vw,16px);line-height:1.6;max-width:36ch;text-shadow:0 1px 10px rgba(0,0,0,.8);min-width:0}
+.stats{position:relative;display:flex;justify-content:center;margin:clamp(22px,3vw,34px) auto 0;max-width:600px;padding:12px 0}
+.stats .br{border-color:var(--vio)}
+.stat{flex:1;display:flex;gap:16px;align-items:center;justify-content:center;padding:4px 18px}
+.stat+.stat{border-left:1px solid rgba(255,255,255,.25)}
+.stat svg{width:34px;height:34px;stroke:var(--ink2);fill:none;stroke-width:1.3;flex:none}
+.stat b{display:block;font-family:var(--f-head);font-size:clamp(24px,3.2vw,36px);font-weight:700;line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat small{display:block;text-align:center;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+.fact{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:var(--card);transition:transform .45s var(--ease),border-color .35s,box-shadow .45s}
+.fact:hover{transform:translateY(-4px);border-color:rgba(214,150,255,.7);box-shadow:0 12px 32px -12px rgba(180,77,255,.7)}
+.fact h3{margin:0 0 6px;font-family:var(--f-head);font-weight:500;font-size:14px;letter-spacing:.06em}
+.fact p{margin:0;font-size:13px;color:var(--ink2)}
+.status{grid-column:1/-1;justify-self:center;display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);border:1px solid var(--line);border-radius:99px;padding:6px 14px;background:rgba(30,12,48,.5)}
+.status i{width:7px;height:7px;border-radius:50%;background:#7dffb0;box-shadow:0 0 8px #7dffb0;animation:blink 2s ease-in-out infinite}
+.shead{display:flex;align-items:center;gap:30px;margin:64px 0 22px}
+.shead h2{font-family:var(--f-head);font-weight:700;font-size:clamp(26px,4vw,42px);margin:0;letter-spacing:.02em}
+.shead p{margin:0;font-size:13px;color:var(--ink2);max-width:40ch;border-left:1px solid rgba(255,255,255,.3);padding-left:30px}
+
+.apps{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.app{position:relative;display:flex;align-items:center;aspect-ratio:1300/770;border-radius:24px;overflow:hidden;container-type:inline-size;isolation:isolate;
+  background:radial-gradient(90% 80% at 80% 40%,rgba(130,40,200,.28),transparent 60%),linear-gradient(160deg,#120719,#07030b 60%);
+  border:2px solid #f2d2ff;box-shadow:0 0 20px rgba(190,80,255,.5),0 0 50px rgba(160,60,240,.2);
+  transition:box-shadow .5s,transform .5s var(--ease)}
+.app::before,.cr::before{content:"";z-index:2;pointer-events:none;position:absolute;left:12%;right:12%;top:-2px;height:2px;background:linear-gradient(90deg,transparent,#fff,transparent);filter:blur(1px);box-shadow:0 0 18px 4px rgba(220,150,255,.8);opacity:.9}
+.app .pic{position:absolute;right:0;top:0;bottom:0;width:60%;background-size:cover;background-position:right center;transition:transform .9s var(--ease);
+  -webkit-mask:linear-gradient(90deg,transparent 0,rgba(0,0,0,.6) 18%,#000 34%);mask:linear-gradient(90deg,transparent 0,rgba(0,0,0,.6) 18%,#000 34%);
+  pointer-events:none}
+.app .glare{position:absolute;inset:0;background:radial-gradient(420px circle at 70% 40%,rgba(210,140,255,.2),transparent 45%);opacity:0;transition:opacity .4s;pointer-events:none}
+.app:hover{transform:translateY(-6px);box-shadow:0 0 40px rgba(200,90,255,.8),0 0 80px rgba(160,60,240,.4)}
+.app:hover .glare{opacity:1}
+.app:hover .pic{transform:scale(1.06)}
+.app .in{position:relative;padding-left:7%;max-width:60%;z-index:20;pointer-events:auto}
+.app h3{margin:0;font-family:"Montserrat",var(--f-head);font-style:italic;font-weight:800;font-size:clamp(26px,8.2cqi,110px);line-height:.98;letter-spacing:-.005em}
+.app h3 .t1{display:block;background:linear-gradient(180deg,#fff 0%,#f1eef6 38%,#8d8799 52%,#dcd7e4 70%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.app h3 .t2{display:block;background:linear-gradient(180deg,#f3d9ff 0%,#c46bff 42%,#7a1fc9 58%,#d88dff 85%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.app p{margin:6cqi 0 0;font-family:"Montserrat",var(--f-body);font-weight:500;font-size:clamp(13px,3.15cqi,40px);line-height:1.3;color:#f4eefb}
+.go{
+  position:relative;z-index:40;
+  display:inline-flex;align-items:center;gap:clamp(10px,2.4cqi,26px);margin-top:6.5cqi;
+  height:clamp(44px,7.2cqi,96px);padding:0 clamp(22px,4cqi,48px);
+  font-family:"Montserrat",var(--f-body);font-weight:600;font-size:clamp(14px,2.9cqi,36px);
+  color:rgba(255,255,255,.55);border-radius:99px;border:2px solid rgba(240,207,255,.45);
+  background:rgba(20,6,36,.35);
+  box-shadow:0 0 10px rgba(233,182,255,.2);
+  cursor:not-allowed;pointer-events:none;user-select:none;
+  opacity:.72;
+}
+.go.live{color:#fff;border-color:#f0cfff;background:linear-gradient(180deg,rgba(155,59,230,.85),rgba(106,31,176,.85));box-shadow:0 0 16px rgba(200,110,255,.55);cursor:pointer;pointer-events:auto;opacity:1;transition:box-shadow .35s,transform .35s var(--ease),filter .35s}
+.go.live:hover{transform:translateY(-2px);filter:brightness(1.15);box-shadow:0 0 28px rgba(210,130,255,.9)}
+.go.live svg{opacity:1;transition:transform .35s var(--ease)}
+.go.live:hover svg{transform:translateX(6px)}
+.go svg{width:clamp(22px,4.6cqi,56px);height:auto;flex:none;stroke:currentColor;fill:none;stroke-width:2;position:relative;z-index:1;opacity:.7}
+/* Счётчик скачиваний Перекупа (число берётся из GoatCounter в script.js; пока не загрузилось — скрыт) */
+.dl-count{position:absolute;right:4cqi;bottom:4cqi;z-index:25;display:flex;align-items:center;gap:clamp(6px,1.4cqi,10px);
+  padding:clamp(5px,1.2cqi,10px) clamp(10px,2.4cqi,18px);border-radius:99px;border:1px solid rgba(220,170,255,.45);
+  background:rgba(14,6,26,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 0 14px rgba(180,77,255,.35);
+  font-family:"Montserrat",var(--f-body);font-weight:500;font-size:clamp(11px,2.3cqi,20px);line-height:1.2;color:#e6dcf5;white-space:nowrap;
+  opacity:0;transform:translateY(4px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.app-more{position:absolute;right:4cqi;top:4cqi;z-index:35;display:inline-flex;align-items:center;gap:8px;padding:clamp(5px,1.1cqi,9px) clamp(10px,2.2cqi,16px);border-radius:99px;
+  border:1px solid rgba(220,170,255,.45);background:rgba(14,6,26,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  font-family:"Montserrat",var(--f-body);font-weight:600;font-size:clamp(11px,2.2cqi,18px);color:#f1e9ff;transition:box-shadow .3s,background .3s,border-color .3s}
+.app-more:hover{background:rgba(120,40,190,.5);border-color:#f0cfff;box-shadow:0 0 16px rgba(180,77,255,.6)}
+.app-more svg{width:clamp(14px,2.6cqi,22px);height:auto;stroke:currentColor;fill:none;stroke-width:2.2;transition:transform .3s var(--ease)}
+.app-more:hover svg{transform:translateX(4px)}
+.join > p.join-more-p{margin:-6px auto 56px}
+.join-more{display:inline-flex;align-items:center;gap:8px;margin-top:4px;font-size:14px;color:var(--ink2);border-bottom:1px solid rgba(213,139,255,.5);padding-bottom:2px;transition:color .3s,border-color .3s}
+.join-more:hover{color:#fff;border-color:#fff}
+.dl-count.on{opacity:1;transform:none}
+.dl-count svg{width:clamp(13px,2.6cqi,22px);height:auto;flex:none;stroke:var(--vio2);fill:none;stroke-width:2.2}
+.dl-count b{font-family:var(--f-head);font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.go-soon{position:absolute;top:-10px;right:-6px;font-size:10px;letter-spacing:.08em;padding:3px 8px;border-radius:99px;background:#5b1a9a;color:#f0d2ff;border:1px solid rgba(240,207,255,.5);font-family:var(--f-body);font-weight:600;opacity:1;pointer-events:none}
+
+/* ===== Лидерка ===== */
+.lead-card{position:relative;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);border-radius:24px;overflow:hidden;isolation:isolate;
+  border:2px solid #f2d2ff;background:linear-gradient(135deg,rgba(38,14,60,.92),rgba(12,6,22,.96));
+  box-shadow:0 0 20px rgba(190,80,255,.5),0 0 50px rgba(160,60,240,.2);transition:box-shadow .5s,transform .5s var(--ease)}
+.lead-card::before{content:"";z-index:3;pointer-events:none;position:absolute;left:12%;right:12%;top:-2px;height:2px;background:linear-gradient(90deg,transparent,#fff,transparent);filter:blur(1px);box-shadow:0 0 18px 4px rgba(220,150,255,.8);opacity:.9}
+.lead-card:hover{transform:translateY(-4px);box-shadow:0 0 40px rgba(200,90,255,.8),0 0 80px rgba(160,60,240,.4)}
+.lead-pic{position:relative;min-height:100%;aspect-ratio:16/9;overflow:hidden;background:#120818}
+.lead-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s var(--ease)}
+.lead-card:hover .lead-pic img{transform:scale(1.04)}
+.lead-pic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 86%,rgba(14,7,24,.9));pointer-events:none}
+.lead-in{position:relative;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:28px 30px 28px 18px;min-width:0}
+.lead-badge{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#bfffd8;
+  border:1px solid rgba(125,255,176,.5);border-radius:99px;padding:6px 14px;background:rgba(20,60,40,.35)}
+.lead-badge i{width:8px;height:8px;border-radius:50%;background:#7dffb0;box-shadow:0 0 8px #7dffb0;animation:blink 2s ease-in-out infinite}
+.lead-in h3{margin:0;font-family:"Montserrat",var(--f-head);font-style:italic;font-weight:800;font-size:clamp(26px,3.4vw,42px);line-height:1}
+.lead-in h3 .t1{display:block;background:linear-gradient(180deg,#fff 0%,#f1eef6 38%,#8d8799 52%,#dcd7e4 70%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead-in h3 .t2{display:block;background:linear-gradient(180deg,#f3d9ff 0%,#c46bff 42%,#7a1fc9 58%,#d88dff 85%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead-in p{margin:0;font-size:14px;line-height:1.55;color:#e0d6ee;padding-left:12px;border-left:2px solid rgba(200,120,255,.7)}
+.lead-meta{display:flex;flex-wrap:wrap;gap:8px}
+.lead-meta span{font-size:12px;padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:rgba(40,16,62,.5);color:var(--ink2)}
+.lead-meta b{color:var(--ink);font-weight:600}
+/* Если лидерки нет: поменяй class="lead-card" на class="lead-card off" */
+.lead-card.off .lead-badge{color:#ffb3c4;border-color:rgba(255,120,150,.5);background:rgba(70,20,35,.35)}
+.lead-card.off .lead-badge i{background:#ff7a99;box-shadow:0 0 8px #ff7a99;animation:none}
+.lead-card.off .lead-pic img{filter:grayscale(1) brightness(.6)}
+@media (max-width:860px){
+  .lead-card{grid-template-columns:1fr}
+  .lead-pic::after{background:linear-gradient(transparent 55%,rgba(14,7,24,.95))}
+  .lead-in{padding:6px 20px 24px}
+}
+
+.creators{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.cr{position:relative;display:grid;grid-template-columns:40% minmax(0,1fr);align-items:center;min-height:300px;border-radius:24px;overflow:hidden;border:2px solid #f2d2ff;
+  background:radial-gradient(120% 90% at 85% 0%,rgba(150,60,230,.32),transparent 55%),linear-gradient(135deg,rgba(38,14,60,.92),rgba(12,6,22,.96));
+  box-shadow:0 0 20px rgba(190,80,255,.5),0 0 50px rgba(160,60,240,.2);transition:box-shadow .5s,transform .5s var(--ease)}
+.cr::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,230,255,.12) 50%,transparent 60%);transform:translateX(-100%);pointer-events:none}
+.cr:hover{transform:translateY(-4px);box-shadow:0 0 40px rgba(200,90,255,.8),0 0 80px rgba(160,60,240,.4)}
+.cr:hover::after{animation:sweep 1.1s var(--ease)}
+.cr-art{position:relative;align-self:stretch;display:grid;place-items:center;padding:18px 0 18px 16px}
+.cr-art img{display:block;width:100%;height:auto;object-fit:contain;animation:float 6s ease-in-out infinite;transition:transform 1.2s var(--ease)}
+.pep .cr-art img{width:92%;border-radius:50%;border:3px solid #d58bff;box-shadow:0 0 15px rgba(190,90,255,.5);animation-delay:-3s}
+.cr:hover .cr-art img{transform:scale(1.04)}
+.cr-in{position:relative;padding:22px 26px 22px 14px;min-width:0;container-type:inline-size}
+.cr-name{margin:0;font-family:var(--f-head);font-style:italic;font-weight:800;font-size:clamp(15px,6.6cqi,30px);line-height:1;letter-spacing:-.01em;white-space:nowrap;
+  background:linear-gradient(180deg,#fff 0%,#e9e3f2 45%,#9d93ad 55%,#f4f0fa 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.cr-handle{margin-top:6px;font-size:15px;color:#e6dcf5}
+.cr-desc{margin:14px 0 16px;padding-left:12px;border-left:2px solid rgba(200,120,255,.7);font-size:14px;line-height:1.45;color:#e0d6ee}
+.promo{position:relative;display:inline-flex;align-items:center;gap:10px;padding:9px 22px;border-radius:99px;border:1.5px solid rgba(220,170,255,.8);font-size:16px;color:#f1e9ff;background:rgba(20,8,34,.5);transition:box-shadow .3s,background .3s}
+.promo b{color:#c25cff;font-family:var(--f-head);font-weight:700;letter-spacing:.02em;}
+.promo:hover{box-shadow:0 0 18px rgba(180,77,255,.6);background:rgba(90,30,140,.35)}
+.promo .ok{position:absolute;left:50%;bottom:calc(100% + 8px);translate:-50% 4px;font-size:12px;white-space:nowrap;padding:4px 10px;border-radius:99px;background:#b44dff;color:#fff;opacity:0;transition:opacity .25s,translate .25s;pointer-events:none}
+.promo.copied .ok{opacity:1;translate:-50% 0}
+.cr-links{display:flex;gap:12px;margin-top:14px}
+.cr-links a{display:grid;place-items:center;width:84px;height:44px;border-radius:99px;border:1.5px solid rgba(220,170,255,.7);background:rgba(20,8,34,.5);transition:box-shadow .3s,background .3s,transform .3s var(--ease)}
+.cr-links a:hover{box-shadow:0 0 18px rgba(180,77,255,.7);background:rgba(120,40,190,.35);transform:translateY(-2px)}
+.cr-links svg{width:24px;height:24px;fill:#fff}
+
+/* История - строгая сетка без скруглений и теней */
+.hist{position:relative;display:block}
+.track{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;padding:10px 0}
+.ph{position:relative;aspect-ratio:16/9;border-radius:0;border:none;overflow:hidden;cursor:pointer;background:#120818;will-change:transform;padding:0}
+.ph img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .5s var(--ease)} /* фото целиком, без обрезки */
+.ph::after{content:"";position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(transparent,rgba(10,4,18,.8));pointer-events:none}
+.ph span{position:absolute;left:14px;bottom:10px;z-index:1;font-family:var(--f-head);font-size:12px;color:var(--vio2);letter-spacing:.08em;text-shadow:0 1px 6px #000}
+.ph:hover img{transform:scale(1.03)}
+
+.join{text-align:center;margin-top:70px}
+.join h2{font-family:var(--f-head);font-weight:700;font-size:clamp(26px,4vw,42px);margin:0;animation:title-glow 4s ease-in-out infinite}
+.join > p{color:var(--ink2);margin:10px auto 0;max-width:46ch}
+.req{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.req span{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:7px 14px;border-radius:99px;border:1px solid var(--line);background:rgba(40,16,62,.5);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.req span:hover{transform:translateY(-2px);border-color:rgba(214,150,255,.8);box-shadow:0 0 16px rgba(180,77,255,.45)}
+.req svg{width:14px;height:14px;stroke:var(--vio2);fill:none;stroke-width:2.2}
+@keyframes title-glow{
+  0%,100%{text-shadow:0 0 20px rgba(180,77,255,.25)}
+  50%{text-shadow:0 0 36px rgba(200,120,255,.55),0 0 60px rgba(180,77,255,.3)}
+}
+.cta{display:flex;justify-content:center;align-items:center;gap:26px;flex-wrap:wrap;margin:34px 0 30px}
+
+.big{
+  position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:14px;
+  padding:18px 56px;min-height:64px;border-radius:99px;
+  font-family:var(--f-head);font-weight:800;font-size:clamp(17px,2.5vw,28px);letter-spacing:.06em;
+  color:#ffffff !important;
+  border:2px solid #ffffff;
+  background:linear-gradient(180deg, #cf68ff 0%, #8a2be2 100%);
+  box-shadow: 0 0 0 3px rgba(207, 104, 255, 0.4), 0 0 30px rgba(200, 120, 255, 0.8);
+  animation:pulse-cta 2.6s ease-in-out infinite;
+  transition:transform .28s var(--ease), filter .28s, box-shadow .28s;
+  z-index:5;cursor:pointer;
+  text-shadow:0 2px 5px rgba(0,0,0,0.5);
+}
+.big::before{
+  content:"";position:absolute;inset:2px;border-radius:99px;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.2) 0%,transparent 50%);
+}
+.big::after{
+  content:"";position:absolute;inset:0;border-radius:99px;pointer-events:none;
+  background:linear-gradient(105deg,transparent 28%,rgba(255,255,255,.55) 48%,transparent 68%);
+  transform:translateX(-130%);
+  animation:shine 3s ease-in-out infinite;
+}
+.big:hover{
+  transform:translateY(-3px) scale(1.04);
+  filter:brightness(1.15) saturate(1.1);
+  box-shadow: 0 0 0 4px rgba(230, 150, 255, 0.6), 0 0 40px rgba(220, 150, 255, 1);
+}
+.big:active{
+  transform:translateY(1px) scale(.99);
+  filter:brightness(.98);
+}
+.big svg{width:28px;height:16px;stroke:#fff;fill:none;stroke-width:2.5;transition:transform .35s var(--ease);position:relative;z-index:1;}
+.big:hover svg{transform:translateX(10px)}
+
+@keyframes pulse-cta{
+  0%,100%{ box-shadow:0 0 0 3px rgba(207, 104, 255, 0.4),0 0 25px rgba(200, 120, 255, 0.8); }
+  50%{ box-shadow:0 0 0 5px rgba(207, 104, 255, 0.6),0 0 45px rgba(220, 140, 255, 1); }
+}
+
+footer{position:relative;z-index:10;text-align:center;isolation:isolate}
+.foot-t{position:relative;z-index:2;font-family:var(--f-head);font-weight:300;font-size:11px;letter-spacing:.6em;color:var(--ink2);padding-left:.6em}
+.foot-l{position:relative;z-index:2;display:flex;justify-content:center;flex-wrap:wrap;gap:10px 22px;padding:0 16px;margin:16px 0 8px;font-size:13px}
+.foot-l a{color:var(--ink2);transition:color .3s}.foot-l a:hover{color:var(--vio2)}
+.copy{position:relative;z-index:2;font-size:12px;color:var(--muted);padding-bottom:18px}
+
+.ground{position:relative;z-index:0;height:clamp(240px,40vw,560px);margin-top:clamp(-260px,-20vw,-120px);overflow:hidden;pointer-events:none;
+  -webkit-mask:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 14%,#000 34%);mask:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 14%,#000 34%)}
+.ground video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 72%;display:block;pointer-events:none;transform:translateZ(0)}
+.ground::after{content:"";position:absolute;inset:auto 0 0;height:18%;background:linear-gradient(transparent,var(--bg))}
+
+/* --- ПОЛНОЭКРАННЫЙ ПРОСМОТР БЕЗ РАМОК И ОТСТУПОВ --- */
+.lb{position:fixed;inset:0;z-index:50;background:#000;display:flex;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:opacity .35s}
+.lb.open{opacity:1;pointer-events:auto}
+.lb img{max-width:100vw;max-height:100vh;width:auto;height:auto;object-fit:contain;border:none;border-radius:0;box-shadow:none;transform:scale(.94);transition:transform .45s var(--ease)}
+.lb.open img{transform:scale(1)}
+
+/* Кнопки управления (минималистичные, без рамок) */
+.lb button{position:absolute;z-index:100;background:rgba(255,255,255,0.1);color:#fff;width:50px;height:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;cursor:pointer;border:none;transition:background .2s,transform .2s}
+.lb button:hover{background:rgba(255,255,255,0.25);transform:scale(1.1)}
+.lb .x{top:20px;right:20px}
+.lb .p{left:20px;top:50%;transform:translateY(-50%)}
+.lb .n{right:20px;top:50%;transform:translateY(-50%)}
+.lb .p:hover, .lb .n:hover {transform:translateY(-50%) scale(1.1);}
+.lb .x svg{width:18px;height:18px;stroke:#fff;stroke-width:2;fill:none}
+.lb .p svg, .lb .n svg {width:20px;height:16px;stroke:#fff;stroke-width:2;fill:none}
+
+.lb .cnt{position:absolute;bottom:20px;left:0;right:0;text-align:center;font-family:var(--f-head);font-size:14px;color:rgba(255,255,255,0.7);pointer-events:none;letter-spacing:2px}
+
+#media{position:relative}
+.streaks{position:absolute;left:-10%;top:-30px;width:120%;height:calc(100% + 80px);z-index:-1;pointer-events:none;overflow:visible}
+.streaks path{fill:none;stroke:#c46bff;stroke-width:2;opacity:.6;stroke-dasharray:260 900;animation:streak 7s linear infinite}
+.streaks path:nth-child(2){animation-duration:9s;animation-delay:-3s}.streaks path:nth-child(3){animation-duration:8s;animation-delay:-5s}
+@keyframes streak{to{stroke-dashoffset:-1160}}
+
+@media (max-width:1000px){.creators{grid-template-columns:1fr}}
+@media (max-width:520px){.cr{grid-template-columns:1fr}.cr-art{padding:18px 0 0}.poch .cr-art img{width:210px}.pep .cr-art img{width:186px}.cr-in{padding:8px 20px 22px}}
+.intro .nav{animation:dropIn .9s var(--ease) both}
+.intro h1.title span{animation:letter 1.1s var(--ease) both;animation-delay:calc(.25s + var(--i)*.08s)}
+.intro .sub{animation:track 1.6s .7s var(--ease) both}
+.intro .frame>.br{animation:corner .9s .5s var(--ease) both}
+.intro .side span{animation:fadeL .8s var(--ease) both;animation-delay:calc(1s + var(--i)*.12s)}
+.intro .side.r span{animation-name:fadeR}
+.intro .art{animation:rise 1.8s .1s var(--ease) both}
+.intro .about{animation:rise 1.2s 1.1s var(--ease) both}
+.intro .stats{animation:rise 1.2s 1.3s var(--ease) both}
+.rv{transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.pre{opacity:.25;transform:translateY(36px) scale(.98)}
+
+/* ===== 3D-наклон карточек за курсором (включает script.js, только для мыши) ===== */
+.tilt{position:relative}
+.tilt:not(.pre){transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--lift,0px));
+  transition:transform .6s var(--ease),box-shadow .5s,border-color .35s,opacity .9s var(--ease)}
+.tilt:hover{--lift:-6px}
+.tilt.tilting:not(.pre){transition:transform .12s linear,box-shadow .5s,border-color .35s,opacity .9s var(--ease)}
+.tilt-layer{translate:calc(var(--mx,0) * var(--d,0) * 1px) calc(var(--my,0) * var(--d,0) * 1px);transition:transform .9s var(--ease),translate .6s var(--ease)}
+.tilting .tilt-layer{transition:transform .9s var(--ease),translate .12s linear}
+.tilt-glare{position:absolute;inset:0;z-index:30;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s;
+  background:radial-gradient(520px circle at var(--gx,50%) var(--gy,50%),rgba(225,170,255,.16),transparent 45%)}
+.tilt:hover .tilt-glare{opacity:1}
+@keyframes dropIn{from{transform:translateY(-100%);opacity:0}}
+@keyframes letter{from{transform:translateY(60%) scale(.9);opacity:0;filter:blur(12px)}}
+@keyframes track{from{letter-spacing:1.4em;opacity:0}}
+@keyframes corner{from{opacity:0;transform:scale(2.4)}}
+@keyframes fadeL{from{opacity:0;transform:translateX(-14px)}}
+@keyframes fadeR{from{opacity:0;transform:translateX(14px)}}
+@keyframes rise{from{opacity:0;transform:translateY(40px) scale(.95)}}
+@keyframes float{50%{transform:translateY(-10px)}}
+@keyframes hue{to{background-position:300% 0}}
+@keyframes sweep{to{transform:translateX(120%)}}
+@keyframes shine{0%,55%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+@keyframes blink{50%{opacity:.35}}
+
+@media (max-width:860px){
+  .nav nav,.nav .btns .pill:not(.solid){display:none}
+  .burger{display:grid}
+  .mnav{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+  .mnav>div{overflow:hidden}
+  .mnav.open{grid-template-rows:1fr}
+  .mnav a{display:block;padding:12px 0;border-top:1px solid rgba(255,255,255,.08);font-size:15px}
+  .side{display:none}
+  .stage{height:calc(100vh - 280px);height:calc(100svh - 280px);min-height:360px}
+  .frame{left:16px;right:16px;top:15%;height:60%}
+  /* размер от ширины экрана: TRIALITY и подпись всегда в одну строку */
+  h1.title{font-size:min(12vw,calc((100vw - 40px) / 8));white-space:nowrap}
+  .sub{font-size:max(9px,min(18px,calc((100vw - 40px) / 25)));letter-spacing:.3em;padding-left:.3em;white-space:nowrap;font-weight:400;text-shadow:0 1px 3px #000,0 0 12px rgba(0,0,0,.9)}.frame .sub{top:44%}
+  .about{grid-template-columns:1fr;text-align:center;gap:14px;margin-top:-70px}.about h2{text-align:center}.about .lead{margin:0 auto;text-align:center}.vline{display:none}
+  .stat{padding:4px 10px;gap:10px}.stat svg{width:26px;height:26px}
+  .facts{grid-template-columns:1fr}
+  .apps{grid-template-columns:1fr}
+  .app .in{max-width:65%}
+  .shead{flex-direction:column;align-items:flex-start;gap:10px}.shead p{border-left:0;padding-left:0}
+  .big{padding:16px 28px}
+}
+/* узкий экран: карточка приложения растёт по содержимому, а не режет текст сверху и снизу */
+@media (max-width:520px){.app{aspect-ratio:auto;min-height:58vw}.app .in{padding-block:22px}}
+@media (max-width:420px){.logo{font-size:14px}.pill.solid{padding:7px 12px;font-size:12px}}
+/* Интро-видео (логика в intro.js) */
+#iv{display:none;position:fixed;inset:0;z-index:9999;background:#000}
+html.iv #iv,#iv.out{display:block}
+html.iv{overflow:hidden}
+#iv video{display:block;width:100%;height:100%;object-fit:cover}
+@media (orientation:portrait){#iv video{object-fit:contain}} /* иначе на телефоне логотип обрезается; фон видео чёрный — полос не видно */
+#iv .pill{position:absolute;z-index:1;top:max(16px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px))}
+#iv.out{opacity:0;transition:opacity .6s ease;pointer-events:none}
+</style>
+<link rel="stylesheet" href="fx.css">
+<script src="intro.js"></script>
+</head>
+<body>
+<div id="iv"><video src="intro.mp4" muted playsinline preload="none" aria-hidden="true"></video><button class="pill solid" type="button">Пропустить</button></div>
+<div class="fogfx" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="TRIALITY, наверх">TRIALITY</a>
+    <nav aria-label="Разделы"><a href="#about">О нас</a><a href="#leader">Лидерка</a><a href="#downloads">Приложения</a><a href="/perekup/">Перекуп</a><a href="#media">Медиа</a><a href="#history">История</a></nav>
+    <div class="btns">
+      <a class="pill solid" href="#join">Вступить</a>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="mnav"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+    </div>
+  </div>
+  <div class="wrap mnav" id="mnav"><div><a href="#about">О нас</a><a href="#leader">Лидерка</a><a href="#downloads">Приложения</a><a href="/perekup/">Перекуп</a><a href="#media">Медиа</a><a href="#history">История</a><a href="#join">Вступить</a></div></div>
+</header>
+<main id="top">
+  <section class="hero">
+    <div class="stage" id="stage">
+      <div class="art" id="art" aria-hidden="true">
+        <video class="vid" id="heroVid" autoplay muted loop playsinline preload="auto" poster="hero-full.jpg">
+          <source src="hero-loop.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="frame">
+        <i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br brr"></i>
+        <h1 class="title" id="title" aria-label="TRIALITY">TRIALITY</h1>
+        <div class="sub">СЕМЬЯ НА GTA 5 RP BLAINE</div>
+        <div class="side l" aria-hidden="true"><span style="--i:0">СИЛА</span><span style="--i:1">РАЗВИТИЕ</span><span style="--i:2">ПОДДЕРЖКА</span><span style="--i:3">ЕДИНСТВО</span></div>
+        <div class="side r" aria-hidden="true"><span style="--i:0">БОЛЬШЕ,</span><span style="--i:1">ЧЕМ</span><span style="--i:2">ИГРА</span></div>
+      </div>
+    </div>
+    <div class="wrap" id="about">
+      <div class="about">
+        <h2>БОЛЬШЕ,<br>ЧЕМ <em>СЕМЬЯ</em></h2>
+        <div class="vline"></div>
+        <p class="lead">TRIALITY — это сообщество людей, которых объединяет общая цель: развитие и страсть к GTA 5 RP. Здесь ценят команду, поддержку и движение вперёд.</p>
+      </div>
+      <div class="stats">
+        <i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br brr"></i>
+        <div class="stat"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.5-4 3.3-6 7-6s6.5 2 7 6"/><circle cx="5" cy="10" r="2.3"/><circle cx="19" cy="10" r="2.3"/></svg><div><b><span data-count="250">250</span>+</b><small>участников</small></div></div>
+        <div class="stat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 5 14h6l-1 8 8-12h-6z"/></svg><div><b>24/7</b><small>онлайн</small></div></div>
+      </div>
+    </div>
+  </section>
+  <div class="ticker" aria-label="TRIALITY, GTA 5 RP, сервер Blaine, набор открыт"><div aria-hidden="true" id="tick"></div></div>
+  <section class="wrap facts">
+    <article class="fact rv"><h3>АКТИВНОСТЬ</h3><p>Ежедневные сборы, CAPTURE, BIZWAR, VZP, RP-мероприятия. У нас всегда есть чем заняться — скучать не придётся.</p></article>
+  <article class="fact rv"><h3>ДИСЦИПЛИНА</h3><p>Чёткая структура и ранги. При этом дружелюбная и комфортная атмосфера внутри коллектива.</p></article>
+    <span class="status rv"><i></i>Семья активна на сервере Blaine (GTA 5 RP)</span>
+  </section>
+  <section class="wrap" id="leader">
+    <div class="shead rv"><h2>ЛИДЕРКА</h2><p>Фракция, которой сейчас руководит семья Triality.</p></div>
+    <!-- Если лидерки нет: class="lead-card off", а в бейдже напиши «Сейчас нет» -->
+    <article class="lead-card rv">
+      <div class="lead-pic"><img src="leader-armenian.jpg" alt="Лидерка Армянской мафии семьи Triality" loading="lazy" decoding="async" width="1672" height="941"></div>
+      <div class="lead-in">
+        <span class="lead-badge"><i></i>Активна</span>
+        <h3><span class="t1">АРМЯНСКАЯ</span><span class="t2">МАФИЯ</span></h3>
+        <p>Сейчас у нас активная лидерка Армянской мафии на сервере Blaine.</p>
+        <div class="lead-meta"><span>Фракция: <b>Армянская мафия</b></span><span>Сервер: <b>Blaine</b></span></div>
+      </div>
+    </article>
+  </section>
+  <section class="wrap" id="downloads">
+    <div class="shead rv"><h2>ПРИЛОЖЕНИЯ</h2><p>Утилиты и программы от семьи Triality.</p></div>
+    <div class="apps">
+      <article class="app rv">
+        <div class="pic" style="background-image:url(mods-art.jpg)"></div><div class="glare"></div>
+        <div class="in">
+          <h3><span class="t1">TRIALITY</span><span class="t2">MODS</span></h3>
+          <p>Наша модификация для комфортной и стабильной игры на GTA5RP.</p>
+          <span class="go" aria-disabled="true" title="Скоро">Скачать<svg viewBox="0 0 40 16" aria-hidden="true"><path d="M0 8h37M30 1l7 7-7 7"/></svg><i class="go-soon">скоро</i></span>
+        </div>
+      </article>
+      <article class="app rv">
+        <div class="pic" style="background-image:url(perekup-art.jpg)"></div><div class="glare"></div>
+        <div class="in">
+          <h3><span class="t1">TRIALITY</span><span class="t2">PEREKUP</span></h3>
+          <p>Умный перекуп-бот для выгодной торговли и контроля рынка.</p>
+          <a class="go live" href="TrialityPerekup-Setup.exe" download title="Скачать последнюю версию" data-goatcounter-click="download-perekup" data-goatcounter-title="Скачать Triality Perekup">Скачать<svg viewBox="0 0 40 16" aria-hidden="true"><path d="M0 8h37M30 1l7 7-7 7"/></svg></a>
+        </div>
+        <a class="app-more" href="/perekup/">Подробнее<svg viewBox="0 0 28 16" aria-hidden="true"><path d="M0 8h26M19 1l7 7-7 7"/></svg></a>
+        <div class="dl-count" id="dlCount" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg><span><b>0</b> <span class="w">скачиваний</span></span></div>
+      </article>
+    </div>
+  </section>
+  <section class="wrap" id="media">
+    <svg class="streaks" viewBox="0 0 1200 520" preserveAspectRatio="none" aria-hidden="true"><path d="M-20 90C220 10 380 60 560 30S900-20 1220 70"/><path d="M820-10C980 120 1060 180 1230 200"/><path d="M1220 340C1100 420 1000 470 860 540"/></svg>
+    <div class="shead rv"><h2>МЕДИА</h2><p>Контент, обзоры, события<br>и лучшие моменты на Blaine.</p></div>
+    <div class="creators">
+      <article class="cr pep rv">
+        <div class="cr-art"><img src="pepez-avatar.png" alt="Аватар PEPEZ" loading="lazy"></div>
+        <div class="cr-in">
+          <h3 class="cr-name">PEPEZ</h3>
+          <div class="cr-handle">@PepezHSS</div>
+          <p class="cr-desc">Снимает видео по GTARP, связанный с семейным и фракционным контентом.</p>
+          <button class="promo" type="button" data-code="PEPEZHS" aria-label="Скопировать промокод PEPEZHS">/promo <b>PEPEZHS</b><span class="ok" aria-live="polite"></span></button>
+          <div class="cr-links">
+            <a href="https://www.youtube.com/@PepezHSS" target="_blank" rel="noopener noreferrer" aria-label="YouTube @PepezHSS"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1z"/></svg></a>
+            <a href="https://t.me/pepez5rp" target="_blank" rel="noopener noreferrer" aria-label="Telegram @PepezHSS"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.5 13.2 1.8 11.7c-1-.3-1-1 .2-1.5L20.5 3c.9-.3 1.6.2 1.4 1.3z"/></svg></a>
+          </div>
+        </div>
+      </article>
+      <article class="cr poch rv">
+        <div class="cr-art"><img src="pochemy-card.png" alt="Аватар POCHEMYCHKA???" loading="lazy"></div>
+        <div class="cr-in">
+          <h3 class="cr-name">POCHEMYCHKA???</h3>
+          <div class="cr-handle">@pochemychkina</div>
+          <p class="cr-desc">Снимает интересный контент от женского лица по GTA5RP, связанный с перепродажами и гайдами.</p>
+          <button class="promo" type="button" data-code="POCHEMY" aria-label="Скопировать промокод POCHEMY">/promo <b>POCHEMY</b><span class="ok" aria-live="polite"></span></button>
+          <div class="cr-links">
+            <a href="https://www.youtube.com/@pochemychkina" target="_blank" rel="noopener noreferrer" aria-label="YouTube @pochemychkina"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1z"/></svg></a>
+            <a href="https://t.me/pochemychkinaa" target="_blank" rel="noopener noreferrer" aria-label="Telegram @pochemychkina"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.5 13.2 1.8 11.7c-1-.3-1-1 .2-1.5L20.5 3c.9-.3 1.6.2 1.4 1.3z"/></svg></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="wrap" id="history">
+    <div class="shead rv"><h2>ИСТОРИЯ</h2><p>Моменты, которые мы пережили вместе.</p></div>
+    <div class="hist rv">
+      <div class="track" id="track"></div>
+    </div>
+  </section>
+  <section class="wrap join" id="join">
+    <h2 class="rv">ХОЧЕШЬ ВСТУПИТЬ?</h2>
+    <p class="rv">Заполни заявку в Discord. Отвечаем в течение 24 часов.</p>
+    <div class="req rv">
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Возраст 16+</span>
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Адекватность</span>
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Актив</span>
+    </div>
+    <div class="cta rv">
+      <a class="big" href="https://discord.com/invite/triality" target="_blank" rel="noopener noreferrer">ПРИСОЕДИНИТЬСЯ <svg viewBox="0 0 28 16"><path d="M0 8h26M19 1l7 7-7 7"/></svg></a>
+    </div>
+    <p class="rv join-more-p"><a class="join-more" href="/join/">Как проходит вступление и что даёт семья →</a></p>
+  </section>
+</main>
+<footer>
+  <div class="foot-t">TRIALITY &nbsp;/&nbsp; GTA 5 RP BLAINE</div>
+  <div class="foot-l">
+    <a href="/perekup/">Triality Перекуп</a>
+    <a href="/join/">Вступить в семью</a>
+    <a href="https://discord.gg/Wehhq7qqGY" target="_blank" rel="noopener noreferrer">Discord</a>
+    <a href="https://www.youtube.com/@PepezHSS" target="_blank" rel="noopener noreferrer">YouTube</a>
+    <a href="https://t.me/trialitymods" target="_blank" rel="noopener noreferrer">Telegram</a>
+  </div>
+  <div class="copy">Семья Triality на GTA 5 RP · © 2026</div>
+  <div class="ground" aria-hidden="true">
+    <video id="groundVid" autoplay muted loop playsinline preload="metadata" poster="ground-poster.jpg">
+      <source src="ground-loop.mp4" type="video/mp4">
+    </video>
+  </div>
+</footer>
+
+<!-- НОВЫЙ ЛАЙТБОКС БЕЗ РАМОК -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Фото из истории" hidden>
+  <img id="lbImg" alt="" decoding="async">
+  <button class="x" id="lbX" aria-label="Закрыть"><svg viewBox="0 0 16 16"><path d="M2 2l12 12M14 2 2 14"/></svg></button>
+  <button class="p" id="lbP" aria-label="Предыдущее фото"><svg viewBox="0 0 16 12"><path d="M16 6H1M5 1 0 6l5 5"/></svg></button>
+  <button class="n" id="lbN" aria-label="Следующее фото"><svg viewBox="0 0 16 12"><path d="M0 6h15M11 1l5 5-5 5"/></svg></button>
+  <div class="cnt" id="lbC"></div>
+</div>
+
+<script src="script.js" defer></script>
+<script src="fx.js" defer></script>
+<!-- Счётчик посещений GoatCounter -->
+<script data-goatcounter="https://triality.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
