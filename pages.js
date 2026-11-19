@@ -72,6 +72,35 @@ if(cv&&cv.getContext){
   requestAnimationFrame(draw);
 }
 
+// 3D-наклон карточек за курсором — тот же, что на главной (только мышь)
+if(!reduce&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+  // [селектор, макс. угол, [слой внутри, глубина сдвига в px]]
+  const cfg=[
+    ['.card',8,[]],
+    ['.steps li',8,[]],
+    ['.shot',6,[['img',-8]]],
+    ['.more a',7,[]]
+  ];
+  cfg.forEach(([sel,max,layers])=>document.querySelectorAll(sel).forEach(card=>{
+    card.classList.add('tilt');
+    layers.forEach(([ls,d])=>card.querySelectorAll(ls).forEach(el=>{el.classList.add('tilt-layer');el.style.setProperty('--d',d)}));
+    const g=document.createElement('i');g.className='tilt-glare';g.setAttribute('aria-hidden','true');card.appendChild(g);
+    let raf=0,ev=null;
+    const apply=()=>{raf=0;if(!ev)return;
+      const r=card.getBoundingClientRect();
+      const px=Math.min(1,Math.max(0,(ev.clientX-r.left)/r.width)),py=Math.min(1,Math.max(0,(ev.clientY-r.top)/r.height));
+      const mx=px*2-1,my=py*2-1;
+      card.style.setProperty('--ry',(mx*max).toFixed(2)+'deg');card.style.setProperty('--rx',(-my*max).toFixed(2)+'deg');
+      card.style.setProperty('--mx',mx.toFixed(3));card.style.setProperty('--my',my.toFixed(3));
+      card.style.setProperty('--gx',(px*100).toFixed(1)+'%');card.style.setProperty('--gy',(py*100).toFixed(1)+'%');
+    };
+    card.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')card.classList.add('tilting')});
+    card.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;ev=e;if(!raf)raf=requestAnimationFrame(apply)},{passive:true});
+    card.addEventListener('pointerleave',()=>{ev=null;card.classList.remove('tilting');
+      ['--rx','--ry'].forEach(v=>card.style.setProperty(v,'0deg'));['--mx','--my'].forEach(v=>card.style.setProperty(v,'0'))});
+  }));
+}
+
 // Кеш для быстрой повторной загрузки (тот же sw.js, что и на главной)
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
 })();
